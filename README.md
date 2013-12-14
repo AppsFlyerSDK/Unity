@@ -1,5 +1,5 @@
                                              
-AppsFlyerUnityPlugin
+Unity
 ====================
 
 Integrating AppsFlyer iOS Plugin
