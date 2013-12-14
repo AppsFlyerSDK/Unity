@@ -1,0 +1,109 @@
+#!/usr/bin/perl 
+
+   use File::Copy; 
+   
+   use IO::Handle;
+
+   #open OUTPUT, '>', "/tmp/unityoutput.txt" or die $!;
+   #open ERROR,  '>', "/tmp/unityerror.txt"  or die $!;
+   #STDOUT->fdopen( \*OUTPUT, 'w' ) or die $!;
+   #STDERR->fdopen( \*ERROR,  'w' ) or die $!;
+   
+   #
+   # - - - > SET APPS FLYER'S PARAMETERS BELOW < - - -
+   #
+   my $APPS_FLYER_KEY = "PLACE YOUR KEY HERE";
+   my $APPLE_ID   = "000000000";
+
+
+  # my $insertHandleOpenUrlCode = 0;   
+
+   # Don't run on any builds that are not iPhone builds
+   if( $ARGV[1] ne "iPhone" )
+     {
+     print("\nNot iPhone build. Exiting.\n");
+     exit;
+     }
+
+   my $DelegateFile = "AppController.mm";
+   # Entry Point for the Application in the above file.
+   my $findAppLaunch1 = "didFinishLaunchingWithOptions:";
+   my $findAppLaunch2 = "applicationDidFinishLaunching:";
+  
+   my $installPath = $ARGV[0]; 
+      
+   
+   print ("\n*** PostprocessBuildPlayer - Building at '$installPath'  ***\n"); 
+      
+   my $dst = $installPath ."/Classes/AppsFlyerTracker.h";  
+   #print ("Copying AppsFlyerTracker.h\n"); 
+   copy($installPath."/Libraries/AppsFlyerTracker.h", $dst) or die "Tracking.h cannot be copied"; 
+   #print ("Done Copying AppsFlyerTracker.h\n"); 
+   
+
+   ##################################### 
+    #     Update the app delegate     # 
+   ##################################### 
+
+   $odlgatePath = $installPath."/Classes/".$DelegateFile; 
+   $ndlgatePath = $installPath."/Classes/".$DelegateFile.".tmp"; 
+
+   
+   open OLDDELEGATE, "<", $odlgatePath or die("Cannot open AppDelegate"); 
+   open NEWDELEGATE, ">", $ndlgatePath or die("Cannot create new AppDelegate"); 
+
+   my $nextLine = 0;    
+   my $doneDelegate = 0;
+       
+   while(<OLDDELEGATE>) 
+   {     
+       if ($_ =~ m/AppsFlyerTracker.h/)
+       {
+	   $doneDelegate = 1;
+       }
+
+       if ($doneDelegate == 0 && $_ =~ m/#import/)
+       {
+	   $_ = "#import \"AppsFlyerTracker.h\"\n" . $_;
+	   print NEWDELEGATE $_;       
+	   last;
+       }
+      print NEWDELEGATE $_;       
+   }
+
+   while(<OLDDELEGATE>) 
+   {     
+       if ($doneDelegate == 0 && $nextLine == 1) 
+       {
+	   if ($_ =~ m/\{/) 
+	     {
+	     $nextLine = 1;
+	     }
+	   else
+	     {
+	     $nextLine = 0;
+
+	     my $tracker = "\n";
+	#     $tracker .= "    [AppsFlyerTracker sharedTracker].isDebug = YES;\n";
+	     $tracker .= "    [[AppsFlyerTracker sharedTracker] init:@\"".$APPS_FLYER_KEY."\" appleAppId:@\"".$APPLE_ID."\"];\n";
+	     $tracker .= "    [[AppsFlyerTracker sharedTracker] trackAppLaunch];\n\n";
+	     
+	     $_ = $_ . $tracker;
+	     }
+       }
+
+       if ($doneDelegate == 0  && $_ =~ m/applicationDidBecomeActive:/ )
+       {
+	   $nextLine = 1;
+	   my $handleURLFunc = "";
+	   
+	   $_ =  $handleURLFunc . $_ ;
+       }       
+
+      print NEWDELEGATE $_;       
+   }   
+
+   close OLDDELEGATE; 
+   close NEWDELEGATE; 
+   
+   `mv \'$ndlgatePath\' \'$odlgatePath\'`; 
