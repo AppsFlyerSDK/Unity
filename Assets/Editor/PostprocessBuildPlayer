@@ -25,7 +25,7 @@
      exit;
      }
 
-   my $DelegateFile = "AppController.mm";
+   my $DelegateFile = "UnityAppController.mm"; 
    # Entry Point for the Application in the above file.
    my $findAppLaunch1 = "didFinishLaunchingWithOptions:";
    my $findAppLaunch2 = "applicationDidFinishLaunching:";
