@@ -6,7 +6,8 @@ Integrating AppsFlyer iOS Plugin
 ================================
 
 Installation instruction for the AppsFlyer's plugin:
-1. Extract the AppsFlyer plugin zip file in your project.
+
+1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
 2. Open /Assets/Editor/PostprocessBuildPlayer and set your AppsFlyer's code and Apple app bundle ID.
  my $APPS_FLYER_KEY = "PLACE YOUR KEY HERE";
@@ -32,7 +33,7 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 Integrating AppsFlyer Android Plugin
 ====================================
-1. Extract the AppsFlyer plugin zip file in your project.
+1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
 2. Modify application manifest file:
    
