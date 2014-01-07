@@ -17,7 +17,14 @@ public class AppsFlyer : MonoBehaviour {
 	private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
 	
 	public static void trackEvent(string eventName,string eventValue){
-		cls_AppsFlyer.CallStatic("sendTrackingWithEvent", eventName, eventValue);
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
+		{
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
+			{
+				cls_AppsFlyer.CallStatic("sendTrackingWithEvent",cls_Activity, eventName, eventValue);
+			}
+		}
+
 	}
 #else
 	
