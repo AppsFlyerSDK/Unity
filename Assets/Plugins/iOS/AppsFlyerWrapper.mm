@@ -27,6 +27,12 @@ extern "C" {
         
     }
     
+    const void mSetCurrencyCode(const char *currencyCode){
+        NSString *code = [NSString stringWithFormat:@"%s",currencyCode];
+        [[AppsFlyerTracker sharedTracker] setCurrencyCode:code];
+        
+    }
+    
     
     
 }

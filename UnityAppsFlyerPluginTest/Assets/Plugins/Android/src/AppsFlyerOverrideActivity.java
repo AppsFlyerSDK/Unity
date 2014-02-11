@@ -15,6 +15,7 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
         Log.d("AppsFlyer", "onCreate called!");
         
         AppsFlyerLib.sendTracking(this);
+
     }
     
     

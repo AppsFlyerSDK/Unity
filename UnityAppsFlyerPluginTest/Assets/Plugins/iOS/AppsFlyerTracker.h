@@ -2,36 +2,63 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  Created by Gil Meroz on 11/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  AppsFlyer iOS SDK v2.5.3.6
+//  6-Feb-2013
+//  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface AppsFlyerTracker : NSObject {
-    NSString* appUID;
-    NSString* deviceUDID;
-    NSString* appsFlyerKey;
+/*
+ This delegate should be use if you want to use AppsFlyer conversion data
+ */
+@protocol AppsFlyerTrackerDelegate <NSObject>
+
+@optional
+- (void) onConversionDataReceived:(NSDictionary*) installData;
+- (void) onConversionDataRequestFailure:(NSError *)error;
+
+@end
+
+@interface AppsFlyerTracker : NSObject<AppsFlyerTrackerDelegate> {
+    NSString* customerUserID;
+    NSString* appsFlyerDevKey;
     NSString* appleAppID;
     NSString* currencyCode;
+    BOOL deviceTrackingDisabled;
+    id<AppsFlyerTrackerDelegate> appsFlyerDelegate;
+    
+    NSTimeInterval entryTime;
+    
     BOOL isDebug;
-    BOOL trackMACAddress;
+    
+    BOOL isHTTPS;
+    
+    BOOL disableAppleAdSupportTracking;
 }
 
-@property (nonatomic,retain) NSString *appUID;
-@property (nonatomic,retain) NSString *deviceUDID;
-@property (nonatomic,retain) NSString *appsFlyerKey;
+@property (nonatomic,retain) NSString *customerUserID;
+@property (nonatomic,retain) NSString *appsFlyerDevKey;
 @property (nonatomic,retain) NSString *appleAppID;
 @property (nonatomic,retain) NSString *currencyCode;
+@property BOOL isHTTPS;
+
+/* 
+AppsFLyer SDK collect Apple's advertisingIdentifier if the AdSupport framework included in the SDK. You can disable this behavior by setting the following property to YES.
+*/
+@property BOOL disableAppleAdSupportTracking;
+
 @property BOOL isDebug;
-@property BOOL trackMACAddress;
+/*
+Opt-out tracking for specific user
+*/
+@property BOOL deviceTrackingDisabled;
 
 +(AppsFlyerTracker*) sharedTracker;
 
-- (void) init:(NSString*)appsFlyerID appleAppId:(NSString*)appID;
 - (void) trackAppLaunch;
-- (void) trackInAppPurchase:(NSString*)product withPrice:(float)price;
 - (void) trackEvent:(NSString*)eventName withValue:(NSString*)value;
 - (NSString *) getAppsFlyerUID;
+- (void) loadConversionDataWithDelegate:(id<AppsFlyerTrackerDelegate>) delegate;
 
 @end
