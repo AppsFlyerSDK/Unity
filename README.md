@@ -92,9 +92,10 @@ Tracking event:
 Setting user local currency code for in app purchases:
 	The currency code should be a 3 character IOS 4217 code. (default is USD)    
 
-	AppsFlyer.setCurrencyCode("GBP");
+    AppsFlyer.setCurrencyCode("GBP");
 
 Settings the user ID as used by the app:
+
     AppsFlyer.setCustomerUserID("someId");
     
 Using AppsFlyer's conversion data:
