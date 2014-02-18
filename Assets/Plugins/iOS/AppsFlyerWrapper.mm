@@ -13,14 +13,6 @@
 @implementation AppsFlyerWarpper
 
 extern "C" {
-    const void initSession(const char *appsFlyerID,const char *appID){
-        NSString *afID = [NSString stringWithFormat:@"%s",appsFlyerID];
-        NSString *appleAppId = [NSString stringWithFormat:@"%s",appID];
-        [AppsFlyerTracker sharedTracker].appleAppID = appleAppId;
-        [AppsFlyerTracker sharedTracker].appsFlyerDevKey = afID;
-        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
-        
-    }
     
     const void mTrackEvent(const char *eventName,const char *eventValue){
         NSString *name = [NSString stringWithFormat:@"%s",eventName];
@@ -47,6 +39,20 @@ extern "C" {
         id<AppsFlyerTrackerDelegate> delegate = [[AppsFlyerConversionDelegate alloc] initWithObjectName:object method:method];
         
         [[AppsFlyerTracker sharedTracker] loadConversionDataWithDelegate:delegate];
+    }
+    
+    const void mSetAppsFlyerDevKey(const char *devKey){
+        NSString *devKeyString = [NSString stringWithFormat:@"%s",devKey];
+        [AppsFlyerTracker sharedTracker].appsFlyerDevKey = devKeyString;
+    }
+    
+    const void mTrackAppLaunch() {
+        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+    }
+    
+    const void mSetAppID(const char *appleAppID){
+        NSString *appleAppIDString = [NSString stringWithFormat:@"%s",appleAppID];
+        [AppsFlyerTracker sharedTracker].appleAppID = appleAppIDString;
     }
     
 }

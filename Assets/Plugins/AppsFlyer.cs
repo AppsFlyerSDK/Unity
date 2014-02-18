@@ -18,6 +18,15 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mLoadConversionData(string callbackObject,string callbackMethod);
 	
+	[DllImport("__Internal")]
+	private static extern void mSetAppsFlyerDevKey(string devKey);
+
+	[DllImport("__Internal")]
+	private static extern void mTrackAppLaunch();
+
+	[DllImport("__Internal")]
+	private static extern void mSetAppID(string appleAppId);
+
 
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -36,7 +45,15 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 	public static void setAppsFlyerKey(string key){
-		// this is currently set in PostprocessBuildPlayer
+		mSetAppsFlyerDevKey(key);
+	}
+	
+	public static void trackAppLaunch(){
+		mTrackAppLaunch();
+	}
+	
+	public static void setAppID(string appleAppId){
+		mSetAppID(appleAppId);
 	}
 
 #elif UNITY_ANDROID
@@ -73,17 +90,24 @@ public class AppsFlyer : MonoBehaviour {
 			
 			}
 		}
-//		using (AndroidJavaClass mainActivity = new AndroidJavaClass("com.appsflyer.AppsFlyerUnityHelper")) 
-//				using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
-//						{
-//			
-//				mainActivity.CallStatic ("createConversionDataListener", cls_Activity, callbackObject, callbackMethod);
-//						}
-//				}	
-	}
+    }
 
 	public static void setAppsFlyerKey(string key){
 		cls_AppsFlyer.CallStatic("setAppsFlyerKey", key);
+	}
+
+	public static void trackAppLaunch(){
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
+		{
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
+			{
+				cls_AppsFlyer.CallStatic("sendTracking",cls_Activity);
+			}
+		}
+	}
+
+	public static void setAppID(string appleAppId){
+		// In Android we take the package name
 	}
 
 #else
@@ -93,5 +117,9 @@ public class AppsFlyer : MonoBehaviour {
 	public static void  setCustomerUserID(string customerUserID){}
 	public static void loadConversionData(string callbackObject,string callbackMethod){}
 	public static void setAppsFlyerKey(string key){}
+
+	public static void trackAppLaunch(){}
+	public static void setAppID(string appleAppId){}
+
 #endif
 }
