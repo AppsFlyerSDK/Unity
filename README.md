@@ -101,15 +101,15 @@ Using AppsFlyer's conversion data:
 ==================================
 To load AppsFlyer's conversion data from it's servers you need add the following code to a Javascript code attached to a GameObject: 
 
-    In the script's Start() function add the following line:
+In the script's Start() function add the following line:
     
     AppsFlyer.loadConversionData(this.name,"someFunction");
 
-    The first parameter is the script name. The second is the name of the function which handles the server's JSON result:
+The first parameter is the script name. The second is the name of the function which handles the server's JSON result:
 
-	function someFunction(json){
-    	Debug.Log("AppsFlyer conversion data: "+json);
-	}
+    function someFunction(json){
+        Debug.Log("AppsFlyer conversion data: "+json);
+    }
         
         
 
