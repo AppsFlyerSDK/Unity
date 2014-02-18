@@ -119,9 +119,9 @@ Initializing AppsFlyer using the CS API:
 If you wish to use API directly instead of the iOS's PostprocessBuildPlayer PERL script 
 or Android AppsFlyerOverrideActivity mentioned above, you can use the API directly as follow:
 
-AppsFlyer.setAppsFlyerKey("YOU DEV KEY");
-AppsFlyer.setAppID("APPLE APP ID"); // only required for iOS.
-AppsFlyer.trackAppLaunch();
+	AppsFlyer.setAppsFlyerKey("YOU DEV KEY");
+	AppsFlyer.setAppID("APPLE APP ID"); // only required for iOS.
+	AppsFlyer.trackAppLaunch();
         
         
 
