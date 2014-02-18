@@ -100,6 +100,7 @@ Settings the user ID as used by the app:
     
 Using AppsFlyer's conversion data:
 ==================================
+
 To load AppsFlyer's conversion data from it's servers you need add the following code to a Javascript code attached to a GameObject: 
 
 In the script's Start() function add the following line:
@@ -111,6 +112,16 @@ The first parameter is the script name. The second is the name of the function w
     function someFunction(json){
         Debug.Log("AppsFlyer conversion data: "+json);
     }
+        
+Initializing AppsFlyer using the CS API:
+========================================
+
+If you wish to use API directly instead of the iOS's PostprocessBuildPlayer PERL script 
+or Android AppsFlyerOverrideActivity mentioned above, you can use the API directly as follow:
+
+AppsFlyer.setAppsFlyerKey("YOU DEV KEY");
+AppsFlyer.setAppID("APPLE APP ID"); // only required for iOS.
+AppsFlyer.trackAppLaunch();
         
         
 
