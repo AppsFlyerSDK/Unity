@@ -70,7 +70,11 @@ Integrating AppsFlyer Android Plugin
        
        In case you would like to use multiple receivers see AppsFlyer android integration guide.
        http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide
-        
+
+    2.5 Set your AppsFlyer's dev key by adding the following line before the </application> tag:
+    
+	   <meta-data android:name="AppsFlyerDevKey" android:value="SET YOUR DEV KEY HERE"/>
+		            
 3. Build and run the app. 
 
    Please refer to chapter 10 at the Android SDK integration guide for testing the integration.
@@ -82,5 +86,30 @@ Plugin API:
 ===========
 
 Tracking event:
+
     AppsFlyer.trackEvent("MyEventName","TheEventValue");
+    
+Setting user local currency code for in app purchases:
+	The currency code should be a 3 character IOS 4217 code. (default is USD)    
+
+	AppsFlyer.setCurrencyCode("GBP");
+
+Settings the user ID as used by the app:
+    AppsFlyer.setCustomerUserID("someId");
+    
+Using AppsFlyer's conversion data:
+==================================
+To load AppsFlyer's conversion data from it's servers you need add the following code to a Javascript code attached to a GameObject: 
+
+    In the script's Start() function add the following line:
+    
+    AppsFlyer.loadConversionData(this.name,"someFunction");
+
+    The first parameter is the script name. The second is the name of the function which handles the server's JSON result:
+
+	function someFunction(json){
+    	Debug.Log("AppsFlyer conversion data: "+json);
+	}
+        
+        
 
