@@ -22,6 +22,9 @@
               <action android:name="com.android.vending.INSTALL_REFERRER" />
           </intent-filter>
        </receiver>
+     <!-- You should place your AppsFlyer dev key below 
+      <meta-data android:name="AppsFlyerDevKey" android:value="YOUR APP DEV KEY"/>
+-->
   </application>
   <uses-feature android:glEsVersion="0x00020000" />
   <uses-permission android:name="android.permission.INTERNET" />
