@@ -71,7 +71,7 @@ Integrating AppsFlyer Android Plugin
        In case you would like to use multiple receivers see AppsFlyer android integration guide.
        http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide
 
-    2.5 Set your AppsFlyer's dev key by adding the following line before the "</application>" tag:
+    2.5 Set your AppsFlyer's dev key by adding the following line at the end of the application section:
     
         <meta-data android:name="AppsFlyerDevKey" android:value="SET YOUR DEV KEY HERE"/>
 		            
