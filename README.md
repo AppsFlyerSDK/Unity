@@ -31,8 +31,8 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 
 
-Integrating AppsFlyer Android Plugin
-====================================
+Integrating AppsFlyer Android Plugin (2.3.1.4)
+==============================================
 1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
 2. Modify application manifest file:
