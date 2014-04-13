@@ -2,7 +2,7 @@
 Unity
 ====================
 
-Integrating AppsFlyer iOS Plugin (v2.5.3.8)
+Integrating AppsFlyer iOS Plugin (v2.5.3.7)
 ============================================
 
 Installation instruction for the AppsFlyer's plugin:
