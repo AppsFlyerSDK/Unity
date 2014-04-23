@@ -24,7 +24,7 @@ Installation instruction for the AppsFlyer's plugin:
 
 Pelase refer to section 6 at the iOS SDK integration guide for in-app event API documentation.
 
-http://support.appsflyer.com/entries/22973717-iOS-SDK-Integration-Guide-
+http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-
 
 Testing SDK integration:
 http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integration-
