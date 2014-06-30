@@ -18,6 +18,7 @@ Installation instruction for the AppsFlyer's plugin:
 4. Open Xcode and add the AdSupport framework to your project:
 
    4.1 In the project navigator select the root.
+   
    4.2 Chose the unity target
    4.3 Go to the "Build Phase"
    4.4 Expand "Link Binary With Libraries"
