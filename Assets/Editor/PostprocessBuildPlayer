@@ -84,7 +84,7 @@
 	     $nextLine = 0;
 
 	     my $tracker = "\n";
-        $tracker .= "    [AppsFlyerTracker sharedTracker].isDebug = YES;\n";
+        $tracker .= "    [AppsFlyerTracker sharedTracker].isDebug = NO;\n";
 	    $tracker .= "    [AppsFlyerTracker sharedTracker].appleAppID = @\"".$APPLE_ID."\";\n";
 	    $tracker .= "    [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @\"".$APPS_FLYER_KEY."\";\n";
 	    $tracker .= "    [[AppsFlyerTracker sharedTracker] trackAppLaunch];\n\n";
