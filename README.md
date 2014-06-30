@@ -78,8 +78,11 @@ Integrating AppsFlyer Android Plugin (2.3.1.4)
        In case you would like to use multiple receivers see AppsFlyer android integration guide.
        http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide
 
-    2.5 Integrate Google Play Services. 
-        Open the Android SDK manager, scroll down to the Extras folder and verify that you have downloaded the Google Play Services package. See http://developer.android.com/google/play-services/setup.html. 
+    2.5 To collect Google advertising ID: Integrate Google Play Services. 
+        Open the Android SDK manager, scroll down to the Extras folder and verify that you have downloaded the Google Play Services package. See http://developer.android.com/google/play-services/setup.html. Uncomment the following line in the AndroidManifest.xml file:
+        
+        <meta-data android:name="com.google.android.gms.version"
+                   android:value="@integer/google_play_services_version" />
     
     2.6 Set your AppsFlyer's dev key by adding the following line at the end of the application section:
     
