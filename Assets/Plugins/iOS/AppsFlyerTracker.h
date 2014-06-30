@@ -2,7 +2,7 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK v2.5.3.7
+//  AppsFlyer iOS SDK v2.5.3.9
 //  22-Feb-2013
 //  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
@@ -11,6 +11,7 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import <StoreKit/StoreKit.h>
 
 /*
  * This delegate should be use if you want to use AppsFlyer conversion data. See AppsFlyer iOS
@@ -36,6 +37,8 @@
     BOOL isHTTPS;
     
     BOOL disableAppleAdSupportTracking;
+
+    BOOL disableIAdTracking;
 }
 
 /* In case you use your own user ID in your app, you can set this property to that ID. */
@@ -73,6 +76,11 @@
  */
 @property BOOL deviceTrackingDisabled;
 
+/*
+ * Opt-out tracking for iAd attributions
+ */
+@property BOOL disableIAdTracking;
+
 +(AppsFlyerTracker*) sharedTracker;
 
 /* Track application launch*/
@@ -84,6 +92,12 @@
  *      [[AppsFlyer sharedTracker] trackEvent:@"hotel-booked" withValue:"200"];
  */
 - (void) trackEvent:(NSString*)eventName withValue:(NSString*)value;
+
+/*
+ * To track in app purchases you can call this method from the completeTransaction: method on 
+ * your SKPaymentTransactionObserver.
+ */
+//- (void) trackInAppPurchase:(SKPaymentTransaction *)transaction;
 
 /* 
  * This method returns AppsFLyer's internal user ID (unique for your app) 
