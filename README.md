@@ -16,12 +16,12 @@ Installation instruction for the AppsFlyer's plugin:
 3. Build the project for iOS.
 
 4. Open Xcode and add the AdSupport framework to your project:
-	4.1 In the project navigator select the root.
-	4.2 Chose the unity target
-	4.3 Go to the "Build Phase"
-	4.4 Expand "Link Binary With Libraries"
-	4.5 Click the "+" at the bottom and add the "AdSupport" framework.
-        4.6 (Optional) If you need to track iAd attributions, Click the "+" at the bottom and add the "iAd" framework.
+4.1 In the project navigator select the root.
+4.2 Chose the unity target
+4.3 Go to the "Build Phase"
+4.4 Expand "Link Binary With Libraries"
+4.5 Click the "+" at the bottom and add the "AdSupport" framework.
+4.6 (Optional) If you need to track iAd attributions, Click the "+" at the bottom and add the "iAd" framework.
 
 Pelase refer to section 6 at the iOS SDK integration guide for in-app event API documentation.
 
