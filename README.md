@@ -9,9 +9,9 @@ Installation instruction for the AppsFlyer's plugin:
 
 1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
-2. Open /Assets/Editor/PostprocessBuildPlayer and set your AppsFlyer's code and Apple app bundle ID.
+2. Open /Assets/Editor/PostprocessBuildPlayer and set your AppsFlyer's code and Apple app ID.
  my $APPS_FLYER_KEY = "PLACE YOUR KEY HERE";
- my $APPLE_ID   = "YOUR BUNDLE ID";
+ my $APPLE_ID   = "YOUR APPLE APP ID";
 
 3. Build the project for iOS.
 
