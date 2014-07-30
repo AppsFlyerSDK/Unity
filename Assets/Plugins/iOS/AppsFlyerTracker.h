@@ -2,7 +2,7 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK v2.5.3.9
+//  AppsFlyer iOS SDK v2.5.3.10
 //  22-Feb-2013
 //  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
@@ -22,7 +22,7 @@
 @optional
 - (void) onConversionDataReceived:(NSDictionary*) installData;
 - (void) onConversionDataRequestFailure:(NSError *)error;
-
+- (void) onCurrentAttributionReceived:(NSDictionary*) installData;
 @end
 
 @interface AppsFlyerTracker : NSObject<AppsFlyerTrackerDelegate> {
@@ -31,8 +31,8 @@
     NSString* appleAppID;
     NSString* currencyCode;
     BOOL deviceTrackingDisabled;
-        
-    BOOL isDebug;
+    
+    BOOL _isDebug;
     
     BOOL isHTTPS;
     
@@ -69,7 +69,7 @@
  * Prints our messages to the log. This property should only be used in DEBUG mode. The default value 
  * is NO.
  */
-@property BOOL isDebug;
+@property (nonatomic, setter = setIsDebug:) BOOL isDebug;
 
 /*
  * Opt-out tracking for specific user
@@ -80,6 +80,16 @@
  * Opt-out tracking for iAd attributions
  */
 @property BOOL disableIAdTracking;
+
+/*
+ * AppsFlyer delegate. See AppsFlyerTrackerDelegate abvoe
+ */
+@property (assign, nonatomic) id<AppsFlyerTrackerDelegate> delegate;
+
+/*
+ * This property is used by AppsFlyer's plugins/extensions like Adobe Air, Unity & PhoneGap for internal use. Developers should not use this property in their apps unless using native SDK within such cross platform.
+ */
+@property (retain, nonatomic) NSString* sdkExtension;
 
 +(AppsFlyerTracker*) sharedTracker;
 
@@ -109,5 +119,10 @@
  * delegate with callbakc buttons for the tracking data. See AppsFlyerTrackerDelegate above.
  */
 - (void) loadConversionDataWithDelegate:(id<AppsFlyerTrackerDelegate>) delegate;
+
+/*
+ * In case you want to track deep linking, call this method from your delegate's openURL method.
+ */
+- (void) handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication;
 
 @end
