@@ -2,7 +2,7 @@
 Unity
 ====================
 
-Integrating AppsFlyer iOS Plugin (v2.5.3.7)
+Integrating AppsFlyer iOS Plugin (v2.5.3.9)
 ============================================
 
 Installation instruction for the AppsFlyer's plugin:
@@ -38,7 +38,7 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 
 
-Integrating AppsFlyer Android Plugin (2.3.1.4)
+Integrating AppsFlyer Android Plugin (2.3.1.9)
 ==============================================
 1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
