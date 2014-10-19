@@ -29,8 +29,9 @@ Installation instruction for the AppsFlyer's plugin:
    
    4.6 (Optional) If you need to track iAd attributions, Click the "+" at the bottom and add the "iAd" framework.
 
-* If you would like the libraries to be automatically added when building for iOS, copy the file _PostprocessBuildPlayer_iOSFrameworks_ from the _iOS Extras_ folder and put it in the _&#60;YOUR PROJECT ROOT>/Assets/Editor_ folder.
-* Next, get the mod_pbxproj.py script available [here](https://github.com/kronenthaler/mod-pbxproj) and copy it into the Editor directory as well. The libraries will now be added automatically during the build. 
+If you would like the libraries to be automatically added when building for iOS, copy the file _PostprocessBuildPlayer_iOSFrameworks_ from the _iOS Extras_ folder and put it in the _&#60;YOUR PROJECT ROOT>/Assets/Editor_ folder.
+
+Next, get the mod_pbxproj.py script available [here](https://github.com/kronenthaler/mod-pbxproj) and copy it into the Editor directory as well. The libraries will now be added automatically during the build. 
 
 Please refer to section 6 at the iOS SDK integration guide for in-app event API documentation.
 
