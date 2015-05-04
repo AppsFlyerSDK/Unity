@@ -7,7 +7,7 @@ Integrating AppsFlyer iOS Plugin (v2.5.3.14.2)
 
 Installation instruction for the AppsFlyer's plugin:
 
-1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
+1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project.
 
 2. Open /Assets/Editor/appcontroller.py and set your AppsFlyer's code and Apple app ID.
  [AppsFlyerTracker sharedTracker].appleAppID = @"APPLE_APP_ID_HERE";
