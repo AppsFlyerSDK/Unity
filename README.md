@@ -2,16 +2,16 @@
 Unity
 ====================
 
-Integrating AppsFlyer iOS Plugin (v2.5.3.9)
+Integrating AppsFlyer iOS Plugin (v2.5.3.14.2)
 ============================================
 
 Installation instruction for the AppsFlyer's plugin:
 
 1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
-2. Open /Assets/Editor/PostprocessBuildPlayer and set your AppsFlyer's code and Apple app ID.
- my $APPS_FLYER_KEY = "PLACE YOUR KEY HERE";
- my $APPLE_ID   = "YOUR APPLE APP ID";
+2. Open /Assets/Editor/appcontroller.py and set your AppsFlyer's code and Apple app ID.
+ [AppsFlyerTracker sharedTracker].appleAppID = @"APPLE_APP_ID_HERE";
+ [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"APPSFLYER_DEV_KEY_HERE";
 
 3. Build the project for iOS.
 
@@ -38,7 +38,7 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 
 
-Integrating AppsFlyer Android Plugin (2.3.1.9)
+Integrating AppsFlyer Android Plugin (2.3.1.17)
 ==============================================
 1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
 
@@ -86,8 +86,11 @@ Integrating AppsFlyer Android Plugin (2.3.1.9)
     
     2.6 Set your AppsFlyer's dev key by adding the following line at the end of the application section:
     
-        <meta-data android:name="AppsFlyerDevKey" android:value="SET YOUR DEV KEY HERE"/>
-		            
+        <meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
+    2.7 Set your Android package name:	            
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" 
+    package="YOUR_PACKAGE_NAME_HERE"
+
 3. Build and run the app. 
 
    Please refer to chapter 10 at the Android SDK integration guide for testing the integration.
@@ -110,30 +113,25 @@ Setting user local currency code for in app purchases:
 Settings the user ID as used by the app:
 
     AppsFlyer.setCustomerUserID("someId");
+
+For Tracking Rich Event please refer to: TrackEventTests.cs in the Unity Sample app attached.
+
     
 Using AppsFlyer's conversion data:
 ==================================
 
-To load AppsFlyer's conversion data from it's servers you need add the following code to a Javascript code attached to a GameObject: 
+To load AppsFlyer's conversion data from it's servers you need to add the AppsFlyerTrackerCallbacks prefab ans attach the AppsFlyerTrackerCallbacks script to it.
 
-In the script's Start() function add the following line:
-    
-    AppsFlyer.loadConversionData(this.name,"someFunction");
 
-The first parameter is the script name. The second is the name of the function which handles the server's JSON result:
 
-    function someFunction(json){
-        Debug.Log("AppsFlyer conversion data: "+json);
-    }
-        
 Initializing AppsFlyer using the CS API:
 ========================================
 
 If you wish to use API directly instead of the iOS's PostprocessBuildPlayer PERL script 
 or Android AppsFlyerOverrideActivity mentioned above, you can use the API directly as follow:
 
-	AppsFlyer.setAppsFlyerKey("YOU DEV KEY");
-	AppsFlyer.setAppID("APPLE APP ID"); // only required for iOS.
+	AppsFlyer.setAppsFlyerKey("YOUR_DEV_KEY_HERE");
+	AppsFlyer.setAppID("APPLE_APP_ID"); // only required for iOS.
 	AppsFlyer.trackAppLaunch();
         
         
