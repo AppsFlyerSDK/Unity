@@ -161,6 +161,8 @@ public class AppsFlyer : MonoBehaviour {
 	public static void setAppsFlyerKey(string key){}
 	public static void trackAppLaunch(){}
 	public static void setAppID(string appleAppId){}
+	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){}
+
 
 #endif
 }

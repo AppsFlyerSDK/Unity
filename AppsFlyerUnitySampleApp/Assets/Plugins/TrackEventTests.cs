@@ -7,7 +7,7 @@ public class TrackEventTests : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		print ("trackEventClass Start called");
-		TrackRichEvent ();
+		TrackRichEventTest ();
 	}
 	
 	// Update is called once per frame
@@ -16,8 +16,8 @@ public class TrackEventTests : MonoBehaviour {
 	}
 
 	// Test in app event
-	public void TrackRichEvent() {
-		print ("TrackRichEvent called");
+	public void TrackRichEventTest() {
+		print ("trackRichEventTest called");
 		Dictionary<string, string> dict = new Dictionary<string, string> ();
 		dict.Add ("currency", "USD");
 		dict.Add ("productId", "123123");
