@@ -28,7 +28,7 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 4.2 Call validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
 
-4.3 Please refer to the Sample app attached for more details.
+4.3 Please refer to the Sample app attached for more details..
 
 
 
