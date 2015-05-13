@@ -32,7 +32,9 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                 } else {
                     String devKeyString = devKeyObj instanceof String ? (String)devKeyObj : devKeyObj.toString();
                     AppsFlyerLib.setAppsFlyerKey(devKeyString);
-                    
+                    AppsFlyerLib.setCollectAndroidID(false);
+                    AppsFlyerLib.setCollectIMEI(false);
+
                     
                     AppsFlyerLib.registerConversionListener(this,new AppsFlyerConversionListener() {
                         public void onInstallConversionDataLoaded(Map<String, String> conversionData) {

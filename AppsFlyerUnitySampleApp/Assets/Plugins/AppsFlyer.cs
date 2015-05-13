@@ -30,6 +30,9 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mTrackRichEvent(string eventName, string eventValues);
 
+	[DllImport("__Internal")]
+	private static extern void mValidateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
+
 
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -65,6 +68,11 @@ public class AppsFlyer : MonoBehaviour {
 
 		mTrackRichEvent (eventName, attributesString);
 	}
+
+	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency) {
+		mValidateReceipt (eventName, failedEventName, eventValue, productIdentifier, price, currency);
+	}
+
 
 #elif UNITY_ANDROID
 	private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
@@ -119,6 +127,11 @@ public class AppsFlyer : MonoBehaviour {
 		// In Android we take the package name
 	}
 
+
+	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, string price, string currency) {
+	}
+
+
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){
 
 
@@ -156,12 +169,13 @@ public class AppsFlyer : MonoBehaviour {
 	
 	public static void trackEvent(string eventName,string eventValue){}
 	public static void setCurrencyCode(string currencyCode){}
-	public static void  setCustomerUserID(string customerUserID){}
+	public static void setCustomerUserID(string customerUserID){}
 	public static void loadConversionData(string callbackObject,string callbackMethod){}
 	public static void setAppsFlyerKey(string key){}
 	public static void trackAppLaunch(){}
 	public static void setAppID(string appleAppId){}
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){}
+	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency){}
 
 
 #endif

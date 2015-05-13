@@ -16,12 +16,20 @@ public class AppsFlyerTrackerCallbacks : MonoBehaviour {
 	}
 	
 	public void didReceiveConversionData(string conversionData) {
-
-		print ("got conversion data = " + conversionData);
+		print ("AppsFlyerTrackerCallbacks:: got conversion data = " + conversionData);
 	}
 
 	public void didReceiveConversionDataWithError(string error) {
-		
-		print ("got conversion data error = " + error);
+		print ("AppsFlyerTrackerCallbacks:: got conversion data error = " + error);
+	}
+
+	public void didFinishValidateReceipt(string validateResult) {
+		print ("AppsFlyerTrackerCallbacks:: got didFinishValidateReceipt  = " + validateResult);
+
+	}
+
+	public void didFinishValidateReceiptWithError (string error) {
+		print ("AppsFlyerTrackerCallbacks:: got idFinishValidateReceiptWithError error = " + error);
+
 	}
 }

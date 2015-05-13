@@ -41,6 +41,7 @@ def process_app_controller_wrapper(appcontroller_filename, newContent, methodSig
 def injectAppsFlyerCode():
     return '''
     [AppsFlyerTracker sharedTracker].isDebug = NO;
+    [AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = YES;
     [AppsFlyerTracker sharedTracker].appleAppID = @"APPLE_APP_ID_HERE";
     [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"APPSFLYER_DEV_KEY_HERE";
     [AppsFlyerTracker sharedTracker].delegate = self;
