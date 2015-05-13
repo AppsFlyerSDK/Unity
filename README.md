@@ -25,7 +25,9 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 4. In-app purchase receipt validation.
 
 4.1 Attach AppsFlyer Tracker Callback script to a Unity Component.
+
 4.2 Call validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
+
 4.3 Please refer to the Sample app attached for more details.
 
 
