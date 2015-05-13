@@ -102,7 +102,7 @@ Tracking event:
     AppsFlyer.trackEvent("MyEventName","TheEventValue");
     
 Setting user local currency code for in app purchases:
-	The currency code should be a 3 character IOS 4217 code. (default is USD)    
+	The currency code should be a 3 character ISO 4217 code. (default is USD)    
 
     AppsFlyer.setCurrencyCode("GBP");
 
@@ -116,7 +116,7 @@ For Tracking Rich Event please refer to: TrackEventTests.cs in the Unity Sample 
 Using AppsFlyer's conversion data:
 ==================================
 
-To load AppsFlyer's conversion data from it's servers you need to add the AppsFlyerTrackerCallbacks prefab ans attach the AppsFlyerTrackerCallbacks script to it.
+To load AppsFlyer's conversion data from it's servers you need to add the AppsFlyerTrackerCallbacks prefab and attach the AppsFlyerTrackerCallbacks script to it.
 
 
 
