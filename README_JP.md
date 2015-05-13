@@ -2,20 +2,29 @@
 Unity
 AppsFlyer iOSプラグイン（v2.5.3.14.2）の導入
 AppsFlyerのプラグインをインストールする方法:
-1. AppsFlyerUnityPlugin.unitypackageをUnityプロジェクトにインポートします。
+1. AppsFlyerUnityPlugin.unitypackageをUnityプロジェクトにインポートします.
+
 2. Assets/Editor/appcontroller.pyを開き、AppsFlyerコードとApple IDを設定します。
+
 [AppsFlyerTracker sharedTracker].appleAppID = @"APPLE_APP_ID_HERE"; [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"APPSFLYER_DEV_KEY_HERE";
-3. iOS向けにプロジェクトを構築します。
+
+3. iOS向けにプロジェクトを構築します。 
 アプリ内イベントAPIについては、APIiOS SDKインテグレーションガイドのセクション6を参照してください。
+
 https://support.appsflyer.com/entries/80418519-iOS-SDK-%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89-%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%AC%E3%82%A4%E3%83%89-v2-5-3-x-New-API-
 SDKの導入テスト方法：https://support.appsflyer.com/entries/80614809-Apple-Store-%E3%81%AB%E6%8F%90%E5%87%BA%E5%89%8D%E3%81%8A%E3%82%88%E3%81%B3%E6%8F%90%E5%87%BA%E5%BE%8C%E3%81%AEAppsFlyer-iOS-SDK%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88
+
 4. アプリケーション内での購入レシート検証（In-App Purchase Receipt Validation）
+
 4.1. UnityコンポーネントにAppsFlyer Tracker Callbackスクリプトを添付します。
+
 4.2. validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency); を呼び出します。
+
 4.3. 詳細は、添付の「Sample」アプリを参照してください。
 
 
 AppsFlyer Android プラグインの導入（2.3.1.17）
+
 1. AppsFlyerのUnityプラグインからAssetsフォルダを、Unityプロジェクトにコピーします。
 2. アプリケーションのマニフェストファイルを変更します：
 2.1. Unityを開きプロジェクトを構築します。
