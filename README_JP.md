@@ -14,7 +14,7 @@ AppsFlyerのプラグインをインストールする方法:
 https://support.appsflyer.com/entries/80418519-iOS-SDK-%E3%81%AE%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89-%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%AC%E3%82%A4%E3%83%89-v2-5-3-x-New-API-
 SDKの導入テスト方法：https://support.appsflyer.com/entries/80614809-Apple-Store-%E3%81%AB%E6%8F%90%E5%87%BA%E5%89%8D%E3%81%8A%E3%82%88%E3%81%B3%E6%8F%90%E5%87%BA%E5%BE%8C%E3%81%AEAppsFlyer-iOS-SDK%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%86%E3%82%B9%E3%83%88
 
-4. アプリケーション内での購入レシート検証（In-App Purchase Receipt Validation）
+4.アプリケーション内での購入レシート検証（In-App Purchase Receipt Validation）
 
 4.1. UnityコンポーネントにAppsFlyer Tracker Callbackスクリプトを添付します。
 
