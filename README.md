@@ -30,6 +30,8 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 4.3 Please refer to the Sample app attached for more details..
 
+4.4 The defualt Environement for Receipt validation is Apple Sandbox, for production please change / remove this:
+[AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = NO;
 
 
 Integrating AppsFlyer Android Plugin (2.3.1.17)
