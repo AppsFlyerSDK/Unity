@@ -69,7 +69,21 @@ def add_conversion_data_delegate_methods():
     NSString *errDesc = [error localizedDescription];
     UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_AFTRACKER, UNITY_SENDMESSAGE_CALLBACK_CONVERSION_ERROR, [errDesc UTF8String]);
 }
-        '''
+
+- (void) onAppOpenAttribution:(NSDictionary*) attributionData {
+
+    NSLog(@"attribution data: %@", attributionData);
+    NSLog(@"%@", attributionData);
+    UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_AFTRACKER, UNITY_SENDMESSAGE_CALLBACK_RETARGETTING, [attributionData UTF8String]);
+}
+
+- (void) onAppOpenAttributionFailure:(NSError *)error {
+    NSLog(@"%@",error);
+    NSString *errDesc = [error localizedDescription];
+    UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_AFTRACKER, UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR, [errDesc UTF8String]);
+}
+
+    '''
 
 def add_send_message_defines():
     return '''
@@ -78,6 +92,8 @@ const char * UNITY_SENDMESSAGE_CALLBACK_AFTRACKER = "AppsFlyerTrackerCallbacks";
 // corresponds to the AppsFlyers Conversions Delegate
 const char * UNITY_SENDMESSAGE_CALLBACK_CONVERSION = "didReceiveConversionData";
 const char * UNITY_SENDMESSAGE_CALLBACK_CONVERSION_ERROR = "didReceiveConversionDataWithError";
+const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING = "onAppOpenAttribution";
+const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR = "onAppOpenAttributionFailure";
         '''
 
 

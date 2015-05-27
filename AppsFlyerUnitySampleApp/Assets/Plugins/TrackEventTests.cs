@@ -24,4 +24,9 @@ public class TrackEventTests : MonoBehaviour {
 		dict.Add ("price", "100");
 		AppsFlyer.trackRichEvent ("add_to_wish_list", dict);
 	}
+
+	public void ValidateReceiptTest () {
+	
+		
+	}
 }

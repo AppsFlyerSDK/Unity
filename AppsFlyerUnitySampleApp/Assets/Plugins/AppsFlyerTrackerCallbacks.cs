@@ -32,4 +32,14 @@ public class AppsFlyerTrackerCallbacks : MonoBehaviour {
 		print ("AppsFlyerTrackerCallbacks:: got idFinishValidateReceiptWithError error = " + error);
 
 	}
+	
+	public void onAppOpenAttribution(string validateResult) {
+		print ("AppsFlyerTrackerCallbacks:: got onAppOpenAttribution  = " + validateResult);
+		
+	}
+	
+	public void onAppOpenAttributionFailure (string error) {
+		print ("AppsFlyerTrackerCallbacks:: got onAppOpenAttributionFailure error = " + error);
+		
+	}
 }
