@@ -87,6 +87,20 @@ Integrating AppsFlyer Android Plugin (2.3.1.17)
     <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" 
     package="YOUR_PACKAGE_NAME_HERE"
 
+
+2.8 There is a way to initialize Appsflyer's Android unity plugin and to turn off the collect IMEI & android id flags.
+    The Appsflyer Override Activity should be removed from the manifest.xml file and use the default unity manifest.
+
+    Then, add this block of code (C#) in your start up scene:
+
+#if UNITY_ANDROID
+    AppsFlyer.setAppsFlyerKey ("APPSFLYER_DEV_KEY_HERE");
+    AppsFlyer.setAppID ("APP_PACKAGE_NAME");
+    AppsFlyer.setCollectIMEI (false);                  
+    AppsFlyer.setCollectAndroidID (false);
+    AppsFlyer.trackAppLaunch ();
+#endif
+
 3. Build and run the app. 
 
    Please refer to chapter 10 at the Android SDK integration guide for testing the integration.
