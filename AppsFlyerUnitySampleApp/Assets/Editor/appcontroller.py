@@ -73,7 +73,7 @@ def add_conversion_data_delegate_methods():
 - (void) onAppOpenAttribution:(NSDictionary*) attributionData {
 
     NSLog(@"attribution data: %@", attributionData);
-    NSLog(@"%@", attributionData);
+    NSString *conversionDataResult = [attributionData description];
     UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_AFTRACKER, UNITY_SENDMESSAGE_CALLBACK_RETARGETTING, [attributionData UTF8String]);
 }
 
