@@ -36,24 +36,18 @@ http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integrat
 
 Integrating AppsFlyer Android Plugin (2.3.1.17)
 ==============================================
-1. Copy the Assets folder from AppsFlyer's Unity plugin to your Unity project.
+1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project.
 
-2. Modify application manifest file:
+2. Open the copied AndroidManifest.xml and set your AppsFlyer's dev key by adding the following line at the end of the application section:
 
-2.1 Open Unity and build your project.
+<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
 
-2.2 Once built, go to the Temp/StagingArea directory within your project and copy the 
-AndroidManifest.xml file to the directory Assets/Plugins/Android/.
+And set your Android package name:	            
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" 
+package="YOUR_PACKAGE_NAME_HERE"
 
-2.3 Open the copied AndroidManifest.xml and change the activity's android:name to com.appsflyer.AppsFlyerOverrideActivity. 
 
-It should look similar to the following:
-
-<activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode=...
-
-This will tell the android to start your application with AppsFlyer extension.
-
-2.4   set permissions (if missing)
+2.1   set permissions (if missing)
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.READ_PHONE_STATE” />
@@ -61,7 +55,7 @@ This will tell the android to start your application with AppsFlyer extension.
 * READ_PHONE_STATE permission is optional. 
 Adding this permission will enable Carrier tracking Android_id and IMEI (required for tracking out of Google Play)
 
-2.5 Set a receiver AndroidManifest.xml
+2.2 Set a receiver AndroidManifest.xml
 Android app cannot have multiple receivers which have the same intent-filtered action.
 AppsFlyer provide a solution that broadcasts INSTALL_REFERRER to all other receivers automatically. 
 In the AndroidManifest.xml, please add the following receiver as the FIRST for INSTALL_REFERRER: 
@@ -75,20 +69,14 @@ In the AndroidManifest.xml, please add the following receiver as the FIRST for I
 In case you would like to use multiple receivers see AppsFlyer android integration guide.
 http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide
 
-2.6 To collect Google advertising ID: Integrate Google Play Services. 
+2.3 To collect Google advertising ID: Integrate Google Play Services. 
 Open the Android SDK manager, scroll down to the Extras folder and verify that you have downloaded the Google Play Services package. See http://developer.android.com/google/play-services/setup.html. Uncomment the following line in the AndroidManifest.xml file:
 
 <meta-data android:name="com.google.android.gms.version"
 android:value="@integer/google_play_services_version" />
 
-2.7 Set your AppsFlyer's dev key by adding the following line at the end of the application section:
 
-<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
-2.8 Set your Android package name:	            
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" 
-package="YOUR_PACKAGE_NAME_HERE"
-
-2.9 There is a way to initialize Appsflyer's Android unity plugin and to turn off the collect IMEI & android id flags (skip setion 2.3, 2.5, 2.7 and 2.8). Basically, The Appsflyer Override Activity should be removed from the manifest.xml file and use the default unity manifest.
+2.4 There is a way to initialize Appsflyer's Android unity plugin and to turn off the collect IMEI & android id flags (skip setion 2.3, 2.5, 2.7 and 2.8). Basically, The Appsflyer Override Activity should be removed from the manifest.xml file and use the default unity manifest.
 
 Then, add this block of code (C#) in your start up scene:
 
