@@ -28,6 +28,9 @@ Installation instructions for the AppsFlyer's plugin:
 			AppsFlyer.trackAppLaunch ();
 	}	
 	
+	<p><h3>Important: The conversion data response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3></p>
+
+	
 There is a sample StartUp.cs sample file included in the project, please refer to it for more information.
 
 
@@ -42,6 +45,15 @@ Add Empty Object call it AppsFlyerTrackerCallbacks, and attach to it the AppsFly
 
 	//The conversion data is in Json Format.
 
+
+#In App Purchase Receipt Validation (iOS only)
+For testing make sure you test against Apple sandbox server call:
+
+		AppsFlyer.setIsSandbox(true);
+		AppsFlyer.validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
+		
+		
+<h3>The validate purchase response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3>
 
 
 #For Android:

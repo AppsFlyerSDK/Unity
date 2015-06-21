@@ -1,4 +1,4 @@
-﻿Inusing UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class StartUp : MonoBehaviour {
@@ -13,7 +13,6 @@ public class StartUp : MonoBehaviour {
 		AppsFlyer.setAppID ("112233445");
 		AppsFlyer.setIsDebug (true);
 		AppsFlyer.getConversionData ();
-
 	
 #elif UNITY_ANDROID
 

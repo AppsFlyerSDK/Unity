@@ -35,10 +35,13 @@ public class AppsFlyer : MonoBehaviour {
 	
 	[DllImport("__Internal")]
 	private static extern void mSetIsDebug(bool isDebug);
-	
+
+	[DllImport("__Internal")]
+	private static extern void mSetIsSandbox(bool isSandbox);
+
 	[DllImport("__Internal")]
 	private static extern void mGetConversionData();
-
+	
 
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -81,6 +84,10 @@ public class AppsFlyer : MonoBehaviour {
 
 	public static void setIsDebug(bool isDebug){
 		mSetIsDebug(isDebug);
+	}
+
+	public static void setIsSandbox(bool isSandbox){
+		mSetIsSandbox(isSandbox);
 	}
 
 	public static void getConversionData () {
@@ -191,6 +198,9 @@ public class AppsFlyer : MonoBehaviour {
 	public static void setIsDebug(bool isDebug) {
 	}
 
+	public static void setIsSandbox(bool isSandbox){
+	}
+
 	public static void getConversionData () {
 	}
 
@@ -206,6 +216,8 @@ public class AppsFlyer : MonoBehaviour {
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){}
 	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency){}
 	public static void setIsDebug(bool isDebug){}
+	public static void setIsSandbox(bool isSandbox){}
 	public static void getConversionData (){}
+
 #endif
 }

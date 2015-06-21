@@ -97,6 +97,11 @@ extern "C" {
         [AppsFlyerTracker sharedTracker].isDebug = isDebug;
     }
     
+    const void mSetIsSandbox(bool isSandbox) {
+        [AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = isSandbox;
+    }
+
+    
     const void mGetConversionData() {
         [[AppsFlyerTracker sharedTracker] setDelegate:[[AppsFlyerDelegate alloc] init]];
     }
