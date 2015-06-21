@@ -1,99 +1,66 @@
 
-Unity
-====================
+#Integrating AppsFlyer Plugin into Unity
 
-Integrating AppsFlyer iOS Plugin (v2.5.3.15.1)
-============================================
+Installation instructions for the AppsFlyer's plugin:
 
-Installation instruction for the AppsFlyer's plugin:
-
-1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project.
-
-2. Open /Assets/Editor/appcontroller.py and set your AppsFlyer's code and Apple app ID.
-[AppsFlyerTracker sharedTracker].appleAppID = @"APPLE_APP_ID_HERE";
-[AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"APPSFLYER_DEV_KEY_HERE";
-
-3. Build the project for iOS.
-
-Pelase refer to section 6 at the iOS SDK integration guide for in-app event API documentation.
-
-http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-
-
-Testing SDK integration:
-http://support.appsflyer.com/entries/22904293-Testing-AppsFlyer-iOS-SDK-Integration-
-
-4.In-app purchase receipt validation.
-
-4.1 Attach AppsFlyer Tracker Callback script to a Unity Component.
-
-4.2 Call validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
-
-4.3 Please refer to the Sample app attached for more details..
-
-4.4 The defualt Environement for Receipt validation is Apple Sandbox, for production please change / remove this:
-[AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = NO;
+1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project. go to Assets/import Package/Custom Pacakge and chose AppsFlyerUnityPlugin.unitypackage file.
 
 
-Integrating AppsFlyer Android Plugin (2.3.1.17)
-==============================================
-1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project.
+2. In your Start / Init methods add the following code:
 
-2. Open the copied AndroidManifest.xml and set your AppsFlyer's dev key by adding the following line at the end of the application section:
+		void Start () {
+		
+			AppsFlyer.setAppsFlyerKey ("YOUR_APPSFLYER_DEV_KEY_HERE");
 
-<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
+		#if UNITY_IOS 
 
-And set your Android package name:	            
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="preferExternal" android:theme="@android:style/Theme.NoTitleBar" 
-package="YOUR_PACKAGE_NAME_HERE"
+			AppsFlyer.setAppID ("YOUR_APP_ID_HERE");
+			AppsFlyer.setIsDebug (true); // for detailed logging
+			AppsFlyer.getConversionData (); // for getting the conversion data will be triggered on AppsFlyerTrackerCallbacks.cs file
+
+		#elif UNITY_ANDROID
+
+			AppsFlyer.setAppID ("YOUR_ANDROID_PACKAGE_NAME_HERE");
+			AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData");
+
+		#endif
+	
+			AppsFlyer.trackAppLaunch ();
+	}	
+	
+There is a sample StartUp.cs sample file included in the project, please refer to it for more information.
 
 
-2.1   set permissions (if missing)
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE” />
+#Getting Conversion Data:
 
-* READ_PHONE_STATE permission is optional. 
+To load AppsFlyer's conversion data from it's servers:
+Add Empty Object call it AppsFlyerTrackerCallbacks, and attach to it the AppsFlyerTrackerCallbacks.cs which is included in the project, for more information, please refer to the sample scene provided with the project.
+
+	public void didReceiveConversionData(string conversionData) {
+		print ("AppsFlyerTrackerCallbacks:: got conversion data = " + conversionData);
+	}
+
+	//The conversion data is in Json Format.
+
+
+
+#For Android:
+Set permissions (if missing):
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE” />
+
+*READ_PHONE_STATE permission is optional.
 Adding this permission will enable Carrier tracking Android_id and IMEI (required for tracking out of Google Play)
 
-2.2 Set a receiver AndroidManifest.xml
-Android app cannot have multiple receivers which have the same intent-filtered action.
-AppsFlyer provide a solution that broadcasts INSTALL_REFERRER to all other receivers automatically. 
-In the AndroidManifest.xml, please add the following receiver as the FIRST for INSTALL_REFERRER: 
+<h3> To collect Google advertising ID</h3>
 
-<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
-<intent-filter>
-<action android:name="com.android.vending.INSTALL_REFERRER" />
-</intent-filter>
-</receiver>
+Integrate Google Play Services. 
 
-In case you would like to use multiple receivers see AppsFlyer android integration guide.
-http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide
-
-2.3 To collect Google advertising ID: Integrate Google Play Services. 
 Open the Android SDK manager, scroll down to the Extras folder and verify that you have downloaded the Google Play Services package. See http://developer.android.com/google/play-services/setup.html. Uncomment the following line in the AndroidManifest.xml file:
 
-<meta-data android:name="com.google.android.gms.version"
-android:value="@integer/google_play_services_version" />
-
-
-2.4 There is a way to initialize Appsflyer's Android unity plugin and to turn off the collect IMEI & android id flags (skip setion 2.3, 2.5, 2.7 and 2.8). Basically, The Appsflyer Override Activity should be removed from the manifest.xml file and use the default unity manifest.
-
-Then, add this block of code (C#) in your start up scene:
-
-/#if UNITY_ANDROID
-
-AppsFlyer.setAppsFlyerKey ("APPSFLYER_DEV_KEY_HERE");
-AppsFlyer.setAppID ("APP_PACKAGE_NAME");
-AppsFlyer.setCollectIMEI (false);                  
-AppsFlyer.setCollectAndroidID (false);
-AppsFlyer.trackAppLaunch ();
-/#endif
-
-3. Build and run the app. 
-
-Please refer to chapter 10 at the Android SDK integration guide for testing the integration.
-http://support.appsflyer.com/attachments/token/dfbenhahuv62oez/?name=AF-Android-Integration-Guide-v1.3.16.0.pdf    
-
+	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
 
 Plugin API:
@@ -106,31 +73,16 @@ AppsFlyer.trackEvent("MyEventName","TheEventValue");
 Setting user local currency code for in app purchases:
 The currency code should be a 3 character ISO 4217 code. (default is USD)    
 
-AppsFlyer.setCurrencyCode("GBP");
+	AppsFlyer.setCurrencyCode("GBP");
 
 Settings the user ID as used by the app:
 
-AppsFlyer.setCustomerUserID("someId");
-
-For Tracking Rich Event please refer to: TrackEventTests.cs in the Unity Sample app attached.
+	AppsFlyer.setCustomerUserID("someId");
 
 
-Using AppsFlyer's conversion data:
-==================================
+Pelase refer to SDK integration guides for complete API documentation.
 
-To load AppsFlyer's conversion data from it's servers you need to add the AppsFlyerTrackerCallbacks prefab and attach the AppsFlyerTrackerCallbacks script to it.
+[iOS Integration Guide](http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-).
 
-
-
-Initializing AppsFlyer using the CS API:
-========================================
-
-If you wish to use API directly instead of the iOS's PostprocessBuildPlayer PERL script 
-or Android AppsFlyerOverrideActivity mentioned above, you can use the API directly as follow:
-
-AppsFlyer.setAppsFlyerKey("YOUR_DEV_KEY_HERE");
-AppsFlyer.setAppID("APPLE_APP_ID"); // only required for iOS.
-AppsFlyer.trackAppLaunch();
-
-
+[Android Integration Guide](http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide).
 
