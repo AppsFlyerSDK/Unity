@@ -13,6 +13,8 @@ public class StartUp : MonoBehaviour {
 		AppsFlyer.setAppID ("112233445");
 		AppsFlyer.setIsDebug (true);
 		AppsFlyer.getConversionData ();
+		AppsFlyer.trackAppLaunch ();
+
 	
 #elif UNITY_ANDROID
 
@@ -21,7 +23,6 @@ public class StartUp : MonoBehaviour {
 
 #endif
 	
-		AppsFlyer.trackAppLaunch ();
 	}
 	
 	// Update is called once per frame

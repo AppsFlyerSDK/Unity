@@ -17,6 +17,7 @@ Installation instructions for the AppsFlyer's plugin:
 			AppsFlyer.setAppID ("YOUR_APP_ID_HERE");
 			AppsFlyer.setIsDebug (true); // for detailed logging
 			AppsFlyer.getConversionData (); // for getting the conversion data will be triggered on AppsFlyerTrackerCallbacks.cs file
+			AppsFlyer.trackAppLaunch ();
 
 		#elif UNITY_ANDROID
 
@@ -25,7 +26,6 @@ Installation instructions for the AppsFlyer's plugin:
 
 		#endif
 	
-			AppsFlyer.trackAppLaunch ();
 	}	
 	
 	<p><h3>Important: The conversion data response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3></p>
@@ -57,7 +57,12 @@ For testing make sure you test against Apple sandbox server call:
 
 
 #For Android:
-Set permissions (if missing):
+
+The Android Override Activity in the manifest sends the TrackAppLaunch() automatically.
+
+If your manifest file is occupied by other services, you can initialize the Appsflyer tracker manually in the startup script, and remove all related code from the manifest.
+
+Set permissions mandatory (if missing):
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
