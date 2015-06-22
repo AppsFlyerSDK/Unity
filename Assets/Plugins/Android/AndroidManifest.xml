@@ -28,6 +28,8 @@
                    android:value="@integer/google_play_services_version" />
     -->
 
+    <meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
+
   </application>
   <uses-feature android:glEsVersion="0x00020000" />
   <uses-permission android:name="android.permission.INTERNET" />
