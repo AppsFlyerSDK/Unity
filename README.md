@@ -63,10 +63,15 @@ The Android Override Activity in the manifest sends the TrackAppLaunch() automat
 If your manifest file is occupied by other services, you can initialize the Appsflyer tracker manually in the startup script, and remove all related code from the manifest.
 
 
+
 	<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
 
 Set permissions mandatory (if missing):
 
+	<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">	<intent-filter>		<action android:name="com.android.vending.INSTALL_REFERRER" />	</intent-filter>	</receiver>
+	// inside the <application> tag
+	
+	//For permissions:
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE” />
