@@ -210,7 +210,7 @@ typedef enum  {
 
 /* 
  * In case you want to use AppsFlyer tracking data in your app you can use the following method set a
- * delegate with callbakc buttons for the tracking data. See AppsFlyerTrackerDelegate above.
+ * delegate with callback buttons for the tracking data. See AppsFlyerTrackerDelegate above.
  */
 - (void) loadConversionDataWithDelegate:(id<AppsFlyerTrackerDelegate>) delegate __attribute__((deprecated));
 
