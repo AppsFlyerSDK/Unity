@@ -93,7 +93,12 @@ Plugin API:
 
 Tracking event:
 
-AppsFlyer.trackEvent("MyEventName","TheEventValue");
+	System.Collections.Generic.Dictionary<string, string> addToCart = new System.Collections.Generic.Dictionary<string, string> ();
+		addToCart.Add ("af_currency", "USD");
+		addToCart.Add ("af_revenue", "0.99");
+		addToCart.Add ("af_quantity", "1");
+
+		AppsFlyer.trackRichEvent ("af_purchase", addToCart);
 
 Setting user local currency code for in app purchases:
 The currency code should be a 3 character ISO 4217 code. (default is USD)    
