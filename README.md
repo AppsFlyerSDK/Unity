@@ -58,13 +58,13 @@ For testing make sure you test against Apple sandbox server call:
 
 #For Android:
 
-The Android Override Activity in the manifest sends the TrackAppLaunch() automatically.
-
-If your manifest file is occupied by other services, you can initialize the Appsflyer tracker manually in the startup script, and remove all related code from the manifest.
-
-
+The Android Override Activity in the manifest sends the <b>TrackAppLaunch()</b> automatically. <br>
+Set the Dev_Key in the manifest.
 
 	<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
+
+
+If your manifest file is occupied by other services, you can initialize the Appsflyer tracker manually in the startup script and call <b> AppsFlyer.trackAppLaunch ();</b> explicitly. <br>Remove all related code from the manifest.
 
 Set permissions mandatory (if missing):
 
