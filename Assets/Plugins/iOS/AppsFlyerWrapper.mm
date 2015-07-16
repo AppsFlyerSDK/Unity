@@ -82,10 +82,23 @@ extern "C" {
         NSString *productIdentifierString = [NSString stringWithUTF8String:productIdentifier];
         NSString *currencyString = [NSString stringWithUTF8String:currency];
         NSDecimalNumber *priceValue = [[NSDecimalNumber alloc] initWithDouble:price];
-
+        
         [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:eventNameString eventNameIfFailed:failedEventNameString withValue:eventValueString withProduct:productIdentifierString price:priceValue currency:currencyString success:^(NSDictionary *result){
             NSLog(@"Purcahse succeeded And verified!!! response: %@", result[@"receipt"]);
-            UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE, [result[@"receipt"] UTF8String]);
+            NSError *jsonError;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
+                                                               options:0
+                                                                 error:&jsonError];
+            if (!jsonData) {
+                NSLog(@"JSON parse error: %@", jsonError);
+                UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [jsonError.localizedDescription UTF8String]);
+            }
+            else {
+                
+                NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+                UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE, [JSONString UTF8String]);
+                
+            }
         } failure:^(NSError *error, id response) {
             NSLog(@"response = %@", response);
             UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [response[@"error"] UTF8String]);
