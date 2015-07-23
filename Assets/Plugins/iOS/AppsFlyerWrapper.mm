@@ -10,12 +10,26 @@
 #import "AppsFlyerTracker.h"
 #import "AppsFlyerDelegate.h"
 
-@interface AppsFlyerWarpper ()
+
+static AppsFlyerDelegate *mAppsFlyerdelegate;
+
+@interface AppsFlyerWarpper () {
+}
 
 @end
 
-
 @implementation AppsFlyerWarpper
+
++(AppsFlyerDelegate *) getAppsFlyerDelegate {
+    
+    if (mAppsFlyerdelegate == nil) {
+        mAppsFlyerdelegate = [[AppsFlyerDelegate alloc] init];
+        
+    }
+    return mAppsFlyerdelegate;
+}
+
+
 
 extern "C" {
     
@@ -116,7 +130,7 @@ extern "C" {
 
     
     const void mGetConversionData() {
-        [[AppsFlyerTracker sharedTracker] setDelegate:[[AppsFlyerDelegate alloc] init]];
+        [[AppsFlyerTracker sharedTracker] setDelegate:[AppsFlyerWarpper getAppsFlyerDelegate]];
     }
 }
 

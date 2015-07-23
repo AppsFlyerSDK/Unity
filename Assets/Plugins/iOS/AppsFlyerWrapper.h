@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppsFlyerDelegate.h"
 
 @interface AppsFlyerWarpper : NSObject 
+
+
++(AppsFlyerDelegate *) getAppsFlyerDelegate;
 
 @end
