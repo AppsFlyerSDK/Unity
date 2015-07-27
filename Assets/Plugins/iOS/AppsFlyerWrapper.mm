@@ -89,15 +89,13 @@ extern "C" {
         [AppsFlyerTracker sharedTracker].appleAppID = appleAppIDString;
     }
     
-    const void mValidateReceipt(const char * eventName, const char *failedEventName, const char *eventValue, const char *productIdentifier,  double price, const char *currency) {
-        NSString *eventNameString = [NSString stringWithUTF8String:eventName];
-        NSString *failedEventNameString = [NSString stringWithUTF8String:failedEventName];
-        NSString *eventValueString = [NSString stringWithUTF8String:eventValue];
+    const void mValidateReceipt(const char *productIdentifier,  const char *price, const char *currency) {
+        
         NSString *productIdentifierString = [NSString stringWithUTF8String:productIdentifier];
         NSString *currencyString = [NSString stringWithUTF8String:currency];
-        NSDecimalNumber *priceValue = [[NSDecimalNumber alloc] initWithDouble:price];
+        NSString *priceValue = [NSString stringWithUTF8String:price];
         
-        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:eventNameString eventNameIfFailed:failedEventNameString withValue:eventValueString withProduct:productIdentifierString price:priceValue currency:currencyString success:^(NSDictionary *result){
+        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString price:priceValue currency:currencyString success:^(NSDictionary *result){
             NSLog(@"Purcahse succeeded And verified!!! response: %@", result[@"receipt"]);
             NSError *jsonError;
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
@@ -132,14 +130,12 @@ extern "C" {
     const void mGetConversionData() {
         [[AppsFlyerTracker sharedTracker] setDelegate:[AppsFlyerWarpper getAppsFlyerDelegate]];
     }
+    
+
+    const void mHandleOpenUrl(const char *url, const char *sourceApplication, const char *annotation) {
+        [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotaion:annotation];
+    }
+    
 }
-
-
-
-
-
-
-
-
 
 @end

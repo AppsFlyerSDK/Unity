@@ -105,6 +105,8 @@ typedef enum  {
     NSArray *userEmails;
 }
 
++(AppsFlyerTracker*) sharedTracker;
+
 /* In case you use your own user ID in your app, you can set this property to that ID. */
 @property (nonatomic, strong, setter=setCustomerUserID:) NSString *customerUserID;
 
@@ -122,7 +124,7 @@ typedef enum  {
 
 
 /* AppsFlyer's SDK send the data to AppsFlyer's servers over HTTPS. You can set the isHTTPS property to NO in order to use regular HTTP. */
-@property BOOL isHTTPS;
+//@property BOOL isHTTPS;
 
 /* 
  * AppsFLyer SDK collect Apple's advertisingIdentifier if the AdSupport framework included in the SDK.
@@ -172,8 +174,6 @@ typedef enum  {
 -(void) setUserEmails:(NSArray *) userEmails withCryptType:(EmailCryptType) type;
 
 
-+(AppsFlyerTracker*) sharedTracker;
-
 /* Track application launch*/
 - (void) trackAppLaunch;
 
@@ -194,11 +194,8 @@ typedef enum  {
  * To track in app purchases you can call this method from the completeTransaction: method on 
  * your SKPaymentTransactionObserver.
  */
-- (void) validateAndTrackInAppPurchase:(NSString *)eventNameIfSuucceed
-                     eventNameIfFailed:(NSString *)failedEventName
-                             withValue:(NSString *)value
-                           withProduct:(NSString *)productIdentifier
-                                 price:(NSDecimalNumber *)price
+- (void) validateAndTrackInAppPurchase:(NSString *)productIdentifier
+                                 price:(NSString *)price
                                  currency:(NSString *)currency
                                success:(void (^)(NSDictionary *response))successBlock
                                failure:(void (^)(NSError *error, id reponse)) failedBlock;

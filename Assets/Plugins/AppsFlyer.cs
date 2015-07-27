@@ -31,7 +31,7 @@ public class AppsFlyer : MonoBehaviour {
 	private static extern void mTrackRichEvent(string eventName, string eventValues);
 
 	[DllImport("__Internal")]
-	private static extern void mValidateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency);
+	private static extern void mValidateReceipt(string productIdentifier, string price, string currency);
 	
 	[DllImport("__Internal")]
 	private static extern void mSetIsDebug(bool isDebug);
@@ -42,6 +42,10 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mGetConversionData();
 	
+	[DllImport("__Internal")]
+	private static extern void mHandleOpenUrl(string url, string sourceApplication, string annotation);
+
+
 
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -78,8 +82,8 @@ public class AppsFlyer : MonoBehaviour {
 		mTrackRichEvent (eventName, attributesString);
 	}
 
-	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency) {
-		mValidateReceipt (eventName, failedEventName, eventValue, productIdentifier, price, currency);
+	public static void validateReceipt(string productIdentifier, string price, string currency) {
+		mValidateReceipt (productIdentifier, price, currency);
 	}
 
 	public static void setIsDebug(bool isDebug){
@@ -92,6 +96,11 @@ public class AppsFlyer : MonoBehaviour {
 
 	public static void getConversionData () {
 		mGetConversionData ();
+	}
+
+	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {
+	
+		mHandleOpenUrl (url, sourceApplication, annotation);
 	}
 
 #elif UNITY_ANDROID
@@ -158,7 +167,7 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 
-	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, string price, string currency) {
+	public static void validateReceipt(string productIdentifier, string price, string currency) {
 	}
 
 
@@ -204,6 +213,8 @@ public class AppsFlyer : MonoBehaviour {
 	public static void getConversionData () {
 	}
 
+	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {
+	}
 #else
 	
 	public static void trackEvent(string eventName,string eventValue){}
@@ -214,10 +225,10 @@ public class AppsFlyer : MonoBehaviour {
 	public static void trackAppLaunch(){}
 	public static void setAppID(string appleAppId){}
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){}
-	public static void validateReceipt(string eventName, string failedEventName, string eventValue, string productIdentifier, double price, string currency){}
+	public static void validateReceipt(string productIdentifier, string price, string currency){}
 	public static void setIsDebug(bool isDebug){}
 	public static void setIsSandbox(bool isSandbox){}
 	public static void getConversionData (){}
-
+	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {}
 #endif
 }
