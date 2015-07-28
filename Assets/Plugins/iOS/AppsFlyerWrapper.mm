@@ -133,7 +133,7 @@ extern "C" {
     
 
     const void mHandleOpenUrl(const char *url, const char *sourceApplication, const char *annotation) {
-        [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotaion:annotation];
+        [[AppsFlyerTracker sharedTracker] handleOpenURL:[NSString stringWithUTF8String:url] sourceApplication:[NSString stringWithUTF8String:sourceApplication] withAnnotaion:[NSString stringWithUTF8String:annotation]];
     }
     
 }
