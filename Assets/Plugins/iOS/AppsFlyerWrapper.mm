@@ -113,7 +113,18 @@ extern "C" {
             }
         } failure:^(NSError *error, id response) {
             NSLog(@"response = %@", response);
-            UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [response[@"error"] UTF8String]);
+            NSString *errorString;
+            if ([response objectForKey:@"error"] != nil){
+                errorString = response[@"error"];
+            }
+            else if ([response objectForKey:@"status"] != nil) {
+                errorString = [NSString stringWithFormat:@"Error code = %@", response[@"status"]];
+            }
+            else {
+                errorString = @"Unknown Error";
+            }
+            
+            UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [errorString UTF8String]);
             
         }];
     }
