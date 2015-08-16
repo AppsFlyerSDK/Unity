@@ -197,6 +197,7 @@ typedef enum  {
 - (void) validateAndTrackInAppPurchase:(NSString *)productIdentifier
                                  price:(NSString *)price
                                  currency:(NSString *)currency
+                                additionalParameters:(NSDictionary *)params
                                success:(void (^)(NSDictionary *response))successBlock
                                failure:(void (^)(NSError *error, id reponse)) failedBlock;
 

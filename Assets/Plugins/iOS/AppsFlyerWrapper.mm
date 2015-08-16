@@ -89,21 +89,44 @@ extern "C" {
         [AppsFlyerTracker sharedTracker].appleAppID = appleAppIDString;
     }
     
-    const void mValidateReceipt(const char *productIdentifier,  const char *price, const char *currency) {
+    const void mValidateReceipt(const char *productIdentifier,  const char *price, const char *currency, const char *additionalParams) {
         
         NSString *productIdentifierString = [NSString stringWithUTF8String:productIdentifier];
         NSString *currencyString = [NSString stringWithUTF8String:currency];
         NSString *priceValue = [NSString stringWithUTF8String:price];
         
-        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString price:priceValue currency:currencyString success:^(NSDictionary *result){
+        
+        NSString *attris = [NSString stringWithUTF8String:additionalParams];
+        
+        NSArray *attributesArray = [attris componentsSeparatedByString:@"\n"];
+        
+        NSMutableDictionary *customParams = [[NSMutableDictionary alloc] init];
+        for (int i=0; i < [attributesArray count]; i++) {
+            NSString *keyValuePair = [attributesArray objectAtIndex:i];
+            NSRange range = [keyValuePair rangeOfString:@"="];
+            if (range.location != NSNotFound) {
+                NSString *key = [keyValuePair substringToIndex:range.location];
+                NSString *value = [keyValuePair substringFromIndex:range.location+1];
+                [customParams setObject:value forKey:key];
+            }
+        }
+
+        
+        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString price:priceValue currency:currencyString additionalParameters:customParams success:^(NSDictionary *result){
+            
             NSLog(@"Purcahse succeeded And verified!!! response: %@", result[@"receipt"]);
-            NSError *jsonError;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
+            
+            NSData *jsonData;
+            if (result[@"receipt"] != nil) {
+                NSError *jsonError;
+                jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
                                                                options:0
                                                                  error:&jsonError];
+            }
+            
             if (!jsonData) {
-                NSLog(@"JSON parse error: %@", jsonError);
-                UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [jsonError.localizedDescription UTF8String]);
+                NSLog(@"JSON parse error");
+                UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [@"Invalid Response" UTF8String]);
             }
             else {
                 

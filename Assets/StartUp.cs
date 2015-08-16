@@ -17,9 +17,15 @@ public class StartUp : MonoBehaviour {
 
 		#elif UNITY_ANDROID
 
-		//AppsFlyer.setAppID ("YOUR_ANDROID_PACKAGE_NAME_HERE"); // un-comment this in case you are not working with the manifest file
-		AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks", "didReceiveConversionData");
+		// All Initialization occur in the override activity defined in the mainfest.xml, including track app launch
+		// You can define AppsFlyer library here use this commented out code.
 
+		//AppsFlyer.setAppID ("YOUR_ANDROID_PACKAGE_NAME_HERE"); // un-comment this in case you are not working with the manifest file
+		//AppsFlyer.setIsSandbox(true);
+		//AppsFlyer.setIsDebug (true);
+		//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure");
+		//AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData", "didReceiveConversionDataWithError");
+		//AppsFlyer.trackAppLaunch ();
 		#endif
 
 	}

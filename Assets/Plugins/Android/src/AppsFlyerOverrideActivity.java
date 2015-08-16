@@ -56,14 +56,26 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                         
                     });
                     
+					AppsFlyerLib.registerValidatorListener(this, new AppsFlyerInAppPurchaseValidatorListener() {
+                         Log.d("AppsFlyerUnity", "AppsFlyer registerValidatorListener call from AppsFlyerOverrideActivity.");
+            			public void onValidateInApp(Boolean var1) {
+		                	Log.d("AppsFlyerLib", "onValidateInApp called = " + var1 );
+		                	com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingSuccess", var1.toString());
+        		    	}
+
+
+            			public void onValidateInAppFailure(String var1) {
+                			Log.d("AppsFlyerLib", "onValidateInAppFailure called " + var1);		
+                	        com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingFailure", var1);
+           	 			}	
+           	 		});     
+
                 }
             }
         } catch(Exception e){
             Log.d("AppsFlyerUnity", "Could not fetch devkey "+e.getMessage());
         }
         
-        Log.d("AppsFlyerUnity", "set dev key");
-
         AppsFlyerLib.sendTracking(this);
 
     }
