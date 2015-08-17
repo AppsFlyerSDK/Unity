@@ -114,7 +114,7 @@ extern "C" {
         
         [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString price:priceValue currency:currencyString additionalParameters:customParams success:^(NSDictionary *result){
             
-            NSLog(@"Purcahse succeeded And verified!!! response: %@", result[@"receipt"]);
+            NSLog(@"Purcahse succeeded And verified!!!");
             
             NSData *jsonData;
             if (result[@"receipt"] != nil) {
