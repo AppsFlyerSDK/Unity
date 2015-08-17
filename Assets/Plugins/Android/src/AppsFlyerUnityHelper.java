@@ -33,7 +33,6 @@ public class AppsFlyerUnityHelper  {
         final String callbackMethodFailedName = callbackFailedMethod;
         final String callbackObjectName = callbackObject;
         
-        Log.i ("AppsFlyerLibUnityhelper", "createValidateInAppListener called.");
         AppsFlyerInAppPurchaseValidatorListener listener = new AppsFlyerInAppPurchaseValidatorListener(){
             public void onValidateInApp(Boolean var){
                 Log.i ("AppsFlyerLibUnityhelper", "onValidateInApp called.");
