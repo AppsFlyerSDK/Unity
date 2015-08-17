@@ -10,6 +10,7 @@ import java.util.Map;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 
 public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
@@ -35,14 +36,14 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                     
                     AppsFlyerLib.registerConversionListener(this,new AppsFlyerConversionListener() {
                         public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
-                            Log.d("AppsFlyerUnity", "getting conversion data: "+ conversionData.toString());
+                            Log.i("AppsFlyerUnity", "getting conversion data: "+ conversionData.toString());
                             
                             JSONObject jsonObject = new JSONObject(conversionData);
                             com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"didReceiveConversionData", jsonObject.toString());
                         }
                         
                         public void onInstallConversionFailure(String errorMessage) {
-                            Log.d("AppsFlyerTest", "error getting conversion data: "+errorMessage);
+                            Log.i("AppsFlyerUnity", "error getting conversion data: "+errorMessage);
                             com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"didReceiveConversionDataWithError", errorMessage);
 
                         }
@@ -57,15 +58,15 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                     });
                     
 					AppsFlyerLib.registerValidatorListener(this, new AppsFlyerInAppPurchaseValidatorListener() {
-                         Log.d("AppsFlyerUnity", "AppsFlyer registerValidatorListener call from AppsFlyerOverrideActivity.");
+
             			public void onValidateInApp(Boolean var1) {
-		                	Log.d("AppsFlyerLib", "onValidateInApp called = " + var1 );
+		                	Log.i("AppsFlyerUnity", "onValidateInApp called = " + var1 );
 		                	com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingSuccess", var1.toString());
         		    	}
 
 
             			public void onValidateInAppFailure(String var1) {
-                			Log.d("AppsFlyerLib", "onValidateInAppFailure called " + var1);		
+                			Log.i("AppsFlyerUnity", "onValidateInAppFailure called " + var1);		
                 	        com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingFailure", var1);
            	 			}	
            	 		});     
