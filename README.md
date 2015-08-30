@@ -66,7 +66,7 @@ Add Empty Object call it AppsFlyerTrackerCallbacks, and attach to it the AppsFly
 
 For testing make sure you test against Apple sandbox server call:
 <pre><code>AppsFlyer.setIsSandbox(true);
-AppsFlyer.validateReceipt(string productIdentifier, double price, string currency);
+AppsFlyer.validateReceipt(string productIdentifier, string price, string currency, string transactionId, Dictionary<string,string> additionalParametes);
 </code></pre>
 
 <h3>Android:</h3>

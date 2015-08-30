@@ -31,7 +31,7 @@ public class AppsFlyer : MonoBehaviour {
 	private static extern void mTrackRichEvent(string eventName, string eventValues);
 	
 	[DllImport("__Internal")]
-	private static extern void mValidateReceipt(string productIdentifier, string price, string currency, string additionalParams);
+	private static extern void mValidateReceipt(string productIdentifier, string price, string currency, string transactionId ,string additionalParams);
 	
 	[DllImport("__Internal")]
 	private static extern void mSetIsDebug(bool isDebug);
@@ -82,13 +82,13 @@ public class AppsFlyer : MonoBehaviour {
 		mTrackRichEvent (eventName, attributesString);
 	}
 	
-	public static void validateReceipt(string productIdentifier, string price, string currency, Dictionary<string,string> additionalParametes) {
+	public static void validateReceipt(string productIdentifier, string price, string currency, string transactionId, Dictionary<string,string> additionalParametes) {
 		string attributesString = "";
 		foreach(KeyValuePair<string, string> kvp in additionalParametes)
 		{
 			attributesString += kvp.Key + "=" + kvp.Value + "\n";
 		}
-		mValidateReceipt (productIdentifier, price, currency, attributesString);
+		mValidateReceipt (productIdentifier, price, currency, transactionId, attributesString);
 	}
 	
 	public static void setIsDebug(bool isDebug){

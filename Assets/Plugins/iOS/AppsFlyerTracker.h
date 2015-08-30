@@ -2,7 +2,7 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK v2.5.3.15
+//  AppsFlyer iOS SDK v2.5.3.18
 //  08-Mar-2015
 //  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
@@ -196,12 +196,13 @@ typedef enum  {
  */
 - (void) validateAndTrackInAppPurchase:(NSString *)productIdentifier
                                  price:(NSString *)price
-                                 currency:(NSString *)currency
-                                additionalParameters:(NSDictionary *)params
+                              currency:(NSString *)currency
+                         transactionId:(NSString *) tranactionId
+                  additionalParameters:(NSDictionary *)params
                                success:(void (^)(NSDictionary *response))successBlock
                                failure:(void (^)(NSError *error, id reponse)) failedBlock;
 
-/* 
+/*
  * This method returns AppsFLyer's internal user ID (unique for your app)
  */
 - (NSString *) getAppsFlyerUID;
