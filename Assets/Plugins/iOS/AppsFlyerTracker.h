@@ -34,6 +34,7 @@
 #define AFEventReEngage                 @"af_re_engage"
 #define AFEventUpdate                   @"af_update"
 #define AFEventOpenedFromPushNotification @"af_opened_from_push_notification"
+#define AFEventLocation                 @"af_location_coordinates"
 
 // In app event parameter names
 #define AFEventParamLevel                  @"af_level"
@@ -202,9 +203,16 @@ typedef enum  {
                                success:(void (^)(NSDictionary *response))successBlock
                                failure:(void (^)(NSError *error, id reponse)) failedBlock;
 
+
+/*
+* To Track location for geo-fencing.
+*/
+
+-(void) trackLocation:(double) longitude latitude:(double) latitude;
 /*
  * This method returns AppsFLyer's internal user ID (unique for your app)
  */
+
 - (NSString *) getAppsFlyerUID;
 
 /* 
@@ -222,6 +230,13 @@ typedef enum  {
  * In case you want to track deep linking, call this method from your delegate's openURL method with refferer.
  */
 - (void) handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication withAnnotaion:(id) annotation;
+
+/* 
+ * For Universal links iOS 9
+ */
+
+-(void) continueUserActivity:(NSUserActivity *) userActivity restorationHandler:(void (^)(NSArray *))restorationHandler;
+-(void) didUpdateUserActivity:(NSUserActivity *)userActivity;
 
 
 @end
