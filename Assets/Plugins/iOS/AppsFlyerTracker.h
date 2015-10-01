@@ -2,12 +2,12 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK v2.5.3.18
-//  08-Mar-2015
+//  AppsFlyer iOS SDK v3.3.1
+//  10-Sep-2015
 //  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
 //  Please read AppsFlyer's iOS SDK documentation before integrating this library in your app:
-//  http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-
+//  https://support.appsflyer.com/attachments/token/wdWOAqKTlLu64zmbmXmU791p5/?name=AF-iOS-Integration-Guide-v3.3.0.pdf
 //
 
 #import <Foundation/Foundation.h>
@@ -85,7 +85,6 @@ typedef enum  {
 
 /*
  * This delegate should be use if you want to use AppsFlyer conversion data. See AppsFlyer iOS
- * Tracking SDK documentation for more details http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-
  */
 @protocol AppsFlyerTrackerDelegate <NSObject>
 
@@ -201,7 +200,7 @@ typedef enum  {
                          transactionId:(NSString *) tranactionId
                   additionalParameters:(NSDictionary *)params
                                success:(void (^)(NSDictionary *response))successBlock
-                               failure:(void (^)(NSError *error, id reponse)) failedBlock;
+                               failure:(void (^)(NSError *error, id reponse)) failedBlock NS_AVAILABLE(10_7, 7_0);
 
 
 /*
@@ -235,8 +234,8 @@ typedef enum  {
  * For Universal links iOS 9
  */
 
--(void) continueUserActivity:(NSUserActivity *) userActivity restorationHandler:(void (^)(NSArray *))restorationHandler;
--(void) didUpdateUserActivity:(NSUserActivity *)userActivity;
+-(void) continueUserActivity:(NSUserActivity *) userActivity restorationHandler:(void (^)(NSArray *))restorationHandler NS_AVAILABLE_IOS(9_0);
+-(void) didUpdateUserActivity:(NSUserActivity *)userActivity NS_AVAILABLE_IOS(9_0);
 
 
 @end
