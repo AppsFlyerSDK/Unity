@@ -170,6 +170,23 @@ extern "C" {
         [[AppsFlyerTracker sharedTracker] handleOpenURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]] sourceApplication:[NSString stringWithUTF8String:sourceApplication] withAnnotaion:[NSString stringWithUTF8String:annotation]];
     }
     
+    char* cStringCopy(const char* string)
+    {
+        if (string == NULL)
+            return NULL;
+        
+        char* res = (char*)malloc(strlen(string) + 1);
+        strcpy(res, string);
+        
+        return res;
+    }
+    
+    const char *mGetAppsFlyerId () {
+        NSString *afid = [[AppsFlyerTracker sharedTracker] getAppsFlyerUID];
+        return cStringCopy([afid UTF8String]);
+    }
+    
+
 }
 
 @end

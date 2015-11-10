@@ -45,7 +45,9 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mHandleOpenUrl(string url, string sourceApplication, string annotation);
 	
-	
+	[DllImport("__Internal")]
+	private static extern string mGetAppsFlyerId();
+
 	
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -102,7 +104,11 @@ public class AppsFlyer : MonoBehaviour {
 	public static void getConversionData () {
 		mGetConversionData ();
 	}
-	
+
+	public static string getAppsFlyerId () {
+		return mGetAppsFlyerId ();
+	}
+
 	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {
 		
 		mHandleOpenUrl (url, sourceApplication, annotation);
@@ -242,6 +248,18 @@ public class AppsFlyer : MonoBehaviour {
 	
 	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {
 	}
+
+	public static string getAppsFlyerId () {
+
+		string appsFlyerId;
+		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				appsFlyerId = cls_AppsFlyer.CallStatic <string> ("getAppsFlyerUID", cls_Activity);
+			}
+		}
+		return appsFlyerId;
+	}
+
 	#else
 	
 	public static void trackEvent(string eventName,string eventValue){}
@@ -256,6 +274,7 @@ public class AppsFlyer : MonoBehaviour {
 	public static void setIsDebug(bool isDebug){}
 	public static void setIsSandbox(bool isSandbox){}
 	public static void getConversionData (){}
+	public static string getAppsFlyerId () {return null;}
 	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {}
 	#endif
 }
