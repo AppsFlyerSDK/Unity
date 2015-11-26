@@ -34,9 +34,9 @@ public class AppsFlyerUnityHelper  {
         final String callbackObjectName = callbackObject;
         
         AppsFlyerInAppPurchaseValidatorListener listener = new AppsFlyerInAppPurchaseValidatorListener(){
-            public void onValidateInApp(Boolean var){
+            public void onValidateInApp(){
                 Log.i ("AppsFlyerLibUnityhelper", "onValidateInApp called.");
-                com.unity3d.player.UnityPlayer.UnitySendMessage(callbackObjectName,callbackMethodName,var.toString());
+                com.unity3d.player.UnityPlayer.UnitySendMessage(callbackObjectName,callbackMethodName,"");
             }
             
             public void onValidateInAppFailure(String errorMessage){

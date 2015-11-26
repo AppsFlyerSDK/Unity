@@ -59,9 +59,9 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                     
 					AppsFlyerLib.registerValidatorListener(this, new AppsFlyerInAppPurchaseValidatorListener() {
 
-            			public void onValidateInApp(Boolean var1) {
-		                	Log.i("AppsFlyerUnity", "onValidateInApp called = " + var1 );
-		                	com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingSuccess", var1.toString());
+            			public void onValidateInApp() {
+		                	Log.i("AppsFlyerUnity", "onValidateInApp called");
+		                	com.unity3d.player.UnityPlayer.UnitySendMessage("AppsFlyerTrackerCallbacks" ,"onInAppBillingSuccess", "");
         		    	}
 
 
