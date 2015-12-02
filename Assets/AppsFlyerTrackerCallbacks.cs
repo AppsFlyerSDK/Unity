@@ -43,8 +43,8 @@ public class AppsFlyerTrackerCallbacks : MonoBehaviour {
 		
 	}
 	
-	public void onInAppBillingSuccess (string res) {
-		print ("AppsFlyerTrackerCallbacks:: got onInAppBillingSuccess succcess var = " + res);
+	public void onInAppBillingSuccess () {
+		print ("AppsFlyerTrackerCallbacks:: got onInAppBillingSuccess succcess");
 		
 	}
 	public void onInAppBillingFailure (string error) {
