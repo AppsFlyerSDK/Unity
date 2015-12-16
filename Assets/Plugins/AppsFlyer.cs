@@ -189,8 +189,8 @@ public class AppsFlyer : MonoBehaviour {
 		}		
 	}
 	
-	
-	public static void validateReceipt(string publicKey, string purchaseData, string signature) {
+
+	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency) {
 		print ("AF.cs validateReceipt pk = " + publicKey + " data = " + purchaseData + "sig = " + signature);
 		
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
@@ -198,7 +198,7 @@ public class AppsFlyer : MonoBehaviour {
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
 			{
 				print ("inside cls_activity");
-				cls_AppsFlyer.CallStatic("validateAndTrackInAppPurchase",cls_Activity, publicKey, purchaseData, signature);
+				cls_AppsFlyer.CallStatic("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, null);
 			}
 		}		
 		
