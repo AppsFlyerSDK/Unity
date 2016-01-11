@@ -89,12 +89,11 @@ Track Event API:
 
 Tracking event example:
 		
-	System.Collections.Generic.Dictionary<string, string> addToCart = new System.Collections.Generic.Dictionary<string, string> ();
-	addToCart.Add ("af_currency", "USD");
-	addToCart.Add ("af_revenue", "0.99");
-	addToCart.Add ("af_quantity", "1");
-	AppsFlyer.trackRichEvent ("af_purchase", addToCart);
-
+	System.Collections.Generic.Dictionary<string, string> af_purchase = new System.Collections.Generic.Dictionary<string, string> ();
+	af_purchase.Add ("af_currency", "USD");
+	af_purchase.Add ("af_revenue", "0.99");
+	af_purchase.Add ("af_quantity", "1");
+	AppsFlyer.trackRichEvent ("af_purchase", af_purchase);
 
 Setting user local currency code for in app purchases:
 The currency code should be a 3 character ISO 4217 code. (default is USD)    
@@ -119,7 +118,11 @@ If your manifest file is occupied by other services, you can initialize the Apps
 
 Set permissions mandatory (if missing):
 
-	<pre><code><receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">	<intent-filter>		<action android:name="com.android.vending.INSTALL_REFERRER" />	</intent-filter>	</receiver>
+	<pre><code><receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+	<intent-filter>
+		<action android:name="com.android.vending.INSTALL_REFERRER" />
+	</intent-filter>
+	</receiver>
 	// inside the <application> tag
 	
 	//For permissions:
