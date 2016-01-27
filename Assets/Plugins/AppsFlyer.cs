@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class AppsFlyer : MonoBehaviour {
 	
 	
-	#if UNITY_IOS
+	#if UNITY_IOS && !UNITY_EDITOR
 	[DllImport("__Internal")]
 	private static extern void mTrackEvent(string eventName,string eventValue);
 	
@@ -114,7 +114,7 @@ public class AppsFlyer : MonoBehaviour {
 		mHandleOpenUrl (url, sourceApplication, annotation);
 	}
 	
-	#elif UNITY_ANDROID
+	#elif UNITY_ANDROID && !UNITY_EDITOR
 	private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
 	private static AndroidJavaClass cls_AppsFlyerHelper = new AndroidJavaClass("com.appsflyer.AppsFlyerUnityHelper");
 	
