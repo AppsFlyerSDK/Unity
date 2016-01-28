@@ -24,7 +24,7 @@ public class AppsFlyerUnityHelper  {
                  com.unity3d.player.UnityPlayer.UnitySendMessage(callbackObjectName,CallbackMethodFailedName, errorMessage);
              }    
            };
-          AppsFlyerLib.getConversionData(context,listener);
+          AppsFlyerLib.getInstance().getConversionData(context,listener);
     }
     
     
@@ -44,7 +44,7 @@ public class AppsFlyerUnityHelper  {
                 com.unity3d.player.UnityPlayer.UnitySendMessage(callbackObjectName,callbackMethodFailedName,errorMessage);
             }
           };
-        AppsFlyerLib.registerValidatorListener (context, listener);
+        AppsFlyerLib.getInstance().registerValidatorListener (context, listener);
 
     }
 

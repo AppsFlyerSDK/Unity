@@ -32,9 +32,9 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                     Log.d("AppsFlyerUnity", "AppsFlyer dev key missing, please set in in the menifest file.");
                 } else {
                     String devKeyString = devKeyObj instanceof String ? (String)devKeyObj : devKeyObj.toString();
-                    AppsFlyerLib.setAppsFlyerKey(devKeyString);
+                    AppsFlyerLib.getInstance().init(this, devKeyString);
                     
-                    AppsFlyerLib.registerConversionListener(this,new AppsFlyerConversionListener() {
+                    AppsFlyerLib.getInstance().registerConversionListener(this,new AppsFlyerConversionListener() {
                         public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
                             Log.i("AppsFlyerUnity", "getting conversion data: "+ conversionData.toString());
                             
@@ -57,7 +57,7 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                         
                     });
                     
-					AppsFlyerLib.registerValidatorListener(this, new AppsFlyerInAppPurchaseValidatorListener() {
+					AppsFlyerLib.getInstance().registerValidatorListener(this, new AppsFlyerInAppPurchaseValidatorListener() {
 
             			public void onValidateInApp() {
 		                	Log.i("AppsFlyerUnity", "onValidateInApp called");
@@ -76,9 +76,5 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
         } catch(Exception e){
             Log.d("AppsFlyerUnity", "Could not fetch devkey "+e.getMessage());
         }
-        
-        AppsFlyerLib.sendTracking(this);
-
     }
-
 } 

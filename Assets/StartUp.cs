@@ -5,17 +5,20 @@ public class StartUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		AppsFlyer.setAppsFlyerKey ("YOUR_APPSFLYER_DEV_KEY_HERE");
-
+		
 		#if UNITY_IOS 
 
-		AppsFlyer.setAppID ("YOUR_APPLE_APP_ID_HERE");
-		AppsFlyer.setIsDebug (true);
-		AppsFlyer.getConversionData ();
-		AppsFlyer.trackAppLaunch ();
+//		AppsFlyer.setAppsFlyerKey ("YOUR_APPSFLYER_DEV_KEY_HERE");
+//		AppsFlyer.setAppID ("YOUR_APPLE_APP_ID_HERE");
+//		AppsFlyer.setIsDebug (true);
+//		AppsFlyer.getConversionData ();
+//		AppsFlyer.trackAppLaunch ();
 
 		#elif UNITY_ANDROID
+
+		// if you are wotking without the manfest, you can initialize the SDK programattically.
+//		AppsFlyer.init ("YOUR_APPSFLYER_DEV_KEY_HERE");
+//		AppsFlyer.setIsDebug(true);
 
 		// All Initialization occur in the override activity defined in the mainfest.xml, including track app launch
 		// You can define AppsFlyer library here use this commented out code.
@@ -29,11 +32,9 @@ public class StartUp : MonoBehaviour {
 		// for in app billing validation
 		//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure"); 
 
-		//AppsFlyer.trackAppLaunch ();
 		#endif
 
-
-		print ("AppsFlyerId = " + AppsFlyer.getAppsFlyerId());
+		//print ("AppsFlyerId = " + AppsFlyer.getAppsFlyerId());
 
 	}
 

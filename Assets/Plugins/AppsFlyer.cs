@@ -115,7 +115,11 @@ public class AppsFlyer : MonoBehaviour {
 	}
 	
 	#elif UNITY_ANDROID
-	private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
+
+	private static AndroidJavaClass obj = new AndroidJavaClass ("com.appsflyer.AppsFlyerLib");
+	private static AndroidJavaObject cls_AppsFlyer = obj.CallStatic<AndroidJavaObject>("getInstance");
+
+	//private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
 	private static AndroidJavaClass cls_AppsFlyerHelper = new AndroidJavaClass("com.appsflyer.AppsFlyerUnityHelper");
 	
 	public static void trackEvent(string eventName,string eventValue){
@@ -123,68 +127,58 @@ public class AppsFlyer : MonoBehaviour {
 		{
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
 			{
-				cls_AppsFlyer.CallStatic("sendTrackingWithEvent",cls_Activity, eventName, eventValue);
+				cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, eventValue);
 			}
 		}
 		
 	}
 	
 	public static void setCurrencyCode(string currencyCode){
-		cls_AppsFlyer.CallStatic("setCurrencyCode", currencyCode);
+		cls_AppsFlyer.Call("setCurrencyCode", currencyCode);
 	}
 	
 	public static void  setCustomerUserID(string customerUserID){
-		cls_AppsFlyer.CallStatic("setAppUserId", customerUserID);
+		cls_AppsFlyer.Call("setAppUserId", customerUserID);
 	}
 	
 	public static void loadConversionData(string callbackObject,string callbackMethod, string callbackFailedMethod){
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
 		{
-			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-			{
-				
-				cls_AppsFlyerHelper.CallStatic("createConversionDataListener", cls_Activity, callbackObject, callbackMethod, callbackFailedMethod);
-				
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				cls_AppsFlyerHelper.Call("createConversionDataListener", cls_Activity, callbackObject, callbackMethod, callbackFailedMethod);	
 			}
 		}
 	}
 	
 	public static void setCollectIMEI (bool shouldCollect) {
-		
-		cls_AppsFlyer.CallStatic("setCollectIMEI", shouldCollect);
+		cls_AppsFlyer.Call("setCollectIMEI", shouldCollect);
 	}
 	
 	public static void setCollectAndroidID (bool shouldCollect) {
 		print("AF.cs setCollectAndroidID");
-		cls_AppsFlyer.CallStatic("setCollectAndroidID", shouldCollect);
+		cls_AppsFlyer.Call("setCollectAndroidID", shouldCollect);
 	}
 	
-	public static void setAppsFlyerKey(string key){
-		cls_AppsFlyer.CallStatic("setAppsFlyerKey", key);
-	}
-	
-	public static void trackAppLaunch(){
-		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
-		{
-			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-			{
-				cls_AppsFlyer.CallStatic("sendTracking",cls_Activity);
+	public static void init(string key){
+		print("AF.cs init");
+		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
+			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
+				cls_AppsFlyer.Call("init", cls_Activity, key);
 			}
 		}
 	}
-	
-	public static void setAppID(string appleAppId){
+
+	public static void setAppID(string packageName){
 		// In Android we take the package name
+		cls_AppsFlyer.Call("setAppId", packageName);
 	}
 	
 	public static void createValidateInAppListener(string aObject, string callbackMethod, string callbackFailedMethod) {
 		print ("AF.cs createValidateInAppListener called");
 		
-		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
-		{
-			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-			{
-				cls_AppsFlyerHelper.CallStatic("createValidateInAppListener", cls_Activity, aObject, callbackMethod, callbackFailedMethod);
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				cls_AppsFlyerHelper.Call("createValidateInAppListener", cls_Activity, aObject, callbackMethod, callbackFailedMethod);
 			}
 		}		
 	}
@@ -193,33 +187,23 @@ public class AppsFlyer : MonoBehaviour {
 	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency) {
 		print ("AF.cs validateReceipt pk = " + publicKey + " data = " + purchaseData + "sig = " + signature);
 		
-		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
-		{
-			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-			{
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
 				print ("inside cls_activity");
-				cls_AppsFlyer.CallStatic("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, null);
+				cls_AppsFlyer.Call("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, null);
 			}
 		}		
-		
 	}
 	
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){
 		
-		
-		using(AndroidJavaObject obj_HashMap = new AndroidJavaObject("java.util.HashMap")) 
-		{
-			
+		using(AndroidJavaObject obj_HashMap = new AndroidJavaObject("java.util.HashMap")) {
 			IntPtr method_Put = AndroidJNIHelper.GetMethodID(obj_HashMap.GetRawClass(), "put", 
 			                                                 "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
-			
 			object[] args = new object[2];
-			foreach(KeyValuePair<string, string> kvp in eventValues)
-			{
-				using(AndroidJavaObject k = new AndroidJavaObject("java.lang.String", kvp.Key))
-				{
-					using(AndroidJavaObject v = new AndroidJavaObject("java.lang.String", kvp.Value))
-					{
+			foreach(KeyValuePair<string, string> kvp in eventValues){
+				using(AndroidJavaObject k = new AndroidJavaObject("java.lang.String", kvp.Key)){
+					using(AndroidJavaObject v = new AndroidJavaObject("java.lang.String", kvp.Value)){
 						args[0] = k;
 						args[1] = v;
 						AndroidJNI.CallObjectMethod(obj_HashMap.GetRawObject(), 
@@ -227,17 +211,28 @@ public class AppsFlyer : MonoBehaviour {
 					}
 				}
 			}
-			using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
-			{
-				using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-				{
-					cls_AppsFlyer.CallStatic("trackEvent",cls_Activity, eventName, obj_HashMap);
+			using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+				using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+					cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, obj_HashMap);
 				}
 			}		
 		}
 	}
-	
+
+	public static void setImeiData(string imeiData) {
+		print("AF.cs setImeiData");
+		cls_AppsFlyer.Call("setImeiData", imeiData);
+	}
+
+	public static void setAndroidIdData(string androidIdData) {
+		print("AF.cs setImeiData");
+		cls_AppsFlyer.Call("setAndroidIdData", androidIdData);
+	}
+
+
 	public static void setIsDebug(bool isDebug) {
+		print("AF.cs setDebugLog");
+		cls_AppsFlyer.Call("setDebugLog", isDebug);
 	}
 	
 	public static void setIsSandbox(bool isSandbox){
@@ -254,7 +249,7 @@ public class AppsFlyer : MonoBehaviour {
 		string appsFlyerId;
 		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
 			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
-				appsFlyerId = cls_AppsFlyer.CallStatic <string> ("getAppsFlyerUID", cls_Activity);
+				appsFlyerId = cls_AppsFlyer.Call <string> ("getAppsFlyerUID", cls_Activity);
 			}
 		}
 		return appsFlyerId;

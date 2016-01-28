@@ -4,7 +4,7 @@
 
 echo "Handle Android jar"
 
-UNITY_LIBS="/Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/Variations/mono/Release/Classes/classes.jar"
+UNITY_LIBS="/Applications/Unity/PlaybackEngines/AndroidPlayer/Variations/mono/Release/Classes/classes.jar"
 export UNITY_LIBS
 
 ANDROID_SDK_ROOT="/Users/golan/Documents/Dev/android-sdk-macosx"
