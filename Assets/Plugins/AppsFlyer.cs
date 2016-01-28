@@ -48,6 +48,9 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern string mGetAppsFlyerId();
 
+	[DllImport("__Internal")]
+	private static extern void mHandlePushNotification(string payload);
+
 	
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -113,13 +116,19 @@ public class AppsFlyer : MonoBehaviour {
 		
 		mHandleOpenUrl (url, sourceApplication, annotation);
 	}
-	
+
+	public static void handlePushNotification(Dictionary<string, string> payload) {
+		string attributesString = "";
+		foreach(KeyValuePair<string, string> kvp in eventValues) {
+			attributesString += kvp.Key + "=" + kvp.Value + "\n";
+		}
+		mHandlePushNotification(payload);
+	}
+
 	#elif UNITY_ANDROID
 
 	private static AndroidJavaClass obj = new AndroidJavaClass ("com.appsflyer.AppsFlyerLib");
 	private static AndroidJavaObject cls_AppsFlyer = obj.CallStatic<AndroidJavaObject>("getInstance");
-
-	//private static AndroidJavaClass cls_AppsFlyer = new AndroidJavaClass("com.appsflyer.AppsFlyerLib");
 	private static AndroidJavaClass cls_AppsFlyerHelper = new AndroidJavaClass("com.appsflyer.AppsFlyerUnityHelper");
 	
 	public static void trackEvent(string eventName,string eventValue){

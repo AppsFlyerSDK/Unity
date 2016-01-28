@@ -97,7 +97,6 @@ extern "C" {
         NSString *transactionIdString = [NSString stringWithUTF8String:transactionId];
         
         NSString *attris = [NSString stringWithUTF8String:additionalParams];
-        
         NSArray *attributesArray = [attris componentsSeparatedByString:@"\n"];
         
         NSMutableDictionary *customParams = [[NSMutableDictionary alloc] init];
@@ -169,6 +168,26 @@ extern "C" {
     const void mHandleOpenUrl(const char *url, const char *sourceApplication, const char *annotation) {
         [[AppsFlyerTracker sharedTracker] handleOpenURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]] sourceApplication:[NSString stringWithUTF8String:sourceApplication] withAnnotaion:[NSString stringWithUTF8String:annotation]];
     }
+    
+    const void mHandlePushNotification(const char *payloadData) {
+      
+        NSString *attris = [NSString stringWithUTF8String:payloadData];
+        NSArray *attributesArray = [attris componentsSeparatedByString:@"\n"];
+        
+        NSMutableDictionary *pushPayloadDict = [[NSMutableDictionary alloc] init];
+        for (int i=0; i < [attributesArray count]; i++) {
+            NSString *keyValuePair = [attributesArray objectAtIndex:i];
+            NSRange range = [keyValuePair rangeOfString:@"="];
+            if (range.location != NSNotFound) {
+                NSString *key = [keyValuePair substringToIndex:range.location];
+                NSString *value = [keyValuePair substringFromIndex:range.location+1];
+                [pushPayloadDict setObject:value forKey:key];
+            }
+        }
+        [[AppsFlyerTracker sharedTracker] handlePushNotification:pushPayloadDict];
+        
+    }
+
     
     char* cStringCopy(const char* string)
     {
