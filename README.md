@@ -1,6 +1,12 @@
 
 <h2>Integrating AppsFlyer Plugin into Unity Project</h2>
 
+Whats new:
+
+1. Update native SDK (iOS & Android) with the latests. for details plesae refer native release notes.
+2. For iOS: add the Security.framework
+
+
 Installation instructions for the AppsFlyer's plugin:
 
 1. Import the AppsFlyerUnityPlugin.unitypackage into your Unity project. go to Assets/import Package/Custom Pacakge and chose AppsFlyerUnityPlugin.unitypackage file.
