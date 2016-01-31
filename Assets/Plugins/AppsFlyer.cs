@@ -119,10 +119,10 @@ public class AppsFlyer : MonoBehaviour {
 
 	public static void handlePushNotification(Dictionary<string, string> payload) {
 		string attributesString = "";
-		foreach(KeyValuePair<string, string> kvp in eventValues) {
+		foreach(KeyValuePair<string, string> kvp in payload) {
 			attributesString += kvp.Key + "=" + kvp.Value + "\n";
 		}
-		mHandlePushNotification(payload);
+		mHandlePushNotification(attributesString);
 	}
 
 	#elif UNITY_ANDROID
