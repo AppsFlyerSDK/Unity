@@ -3,8 +3,12 @@
 
 Whats new:
 
-1. Update native SDK (iOS & Android) with the latests. for details plesae refer native release notes.
-2. For iOS: add the Security.framework
+V-4.3
+- Fixed Android build issue.
+- Updated iOS native SDK to v4.3.7
+
+
+For iOS: add the Security.framework
 
 
 Installation instructions for the AppsFlyer's plugin:
