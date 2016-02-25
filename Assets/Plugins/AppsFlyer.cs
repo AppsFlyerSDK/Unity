@@ -178,7 +178,8 @@ public class AppsFlyer : MonoBehaviour {
 	}
 	
 	public static void setAppsFlyerKey(string key){
-		init(key);
+			print("AF.cs setAppsFlyerKey");
+			init(key);
 	}
 	
 	public static void trackAppLaunch(){}

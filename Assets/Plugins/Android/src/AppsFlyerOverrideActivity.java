@@ -31,7 +31,10 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                 if (devKeyObj == null){
                     Log.d("AppsFlyerUnity", "AppsFlyer dev key missing, please set in in the menifest file.");
                 } else {
+
                     String devKeyString = devKeyObj instanceof String ? (String)devKeyObj : devKeyObj.toString();
+                    Log.i("AppsFlyerUnity", "devKeyString: "+ devKeyString);
+
                     AppsFlyerLib.getInstance().init(this, devKeyString);
                     
                     AppsFlyerLib.getInstance().registerConversionListener(this,new AppsFlyerConversionListener() {

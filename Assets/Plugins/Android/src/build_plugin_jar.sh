@@ -10,7 +10,7 @@ export UNITY_LIBS
 ANDROID_SDK_ROOT="/Users/golan/Documents/Dev/android-sdk-macosx"
 
 export ANDROID_SDK_ROOT
-CLASSPATH=../AF-Android-SDK.jar:$UNITY_LIBS:$ANDROID_SDK_ROOT/platforms/android-21/android.jar
+CLASSPATH=../AF-Android-SDK.jar:$UNITY_LIBS:$ANDROID_SDK_ROOT/platforms/android-23/android.jar
 export CLASSPATH
 
 echo "Compiling ..."
