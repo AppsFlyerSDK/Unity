@@ -48,7 +48,6 @@ Installation instructions for the AppsFlyer's plugin:
 	//AppsFlyer.setIsDebug (true);
 	//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure");
 	//AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData", "didReceiveConversionDataWithError");
-	//AppsFlyer.trackAppLaunch ();
 
 	#endif
 }	</code></pre>
