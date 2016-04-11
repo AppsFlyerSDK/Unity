@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppsFlyerTracker.h"
+#import "AppDelegateListener.h"
 
 
 static const char * UNITY_SENDMESSAGE_CALLBACK_MANAGER = "AppsFlyerTrackerCallbacks";
@@ -22,6 +23,9 @@ static const char * UNITY_SENDMESSAGE_CALLBACK_CONVERSION_ERROR = "didReceiveCon
 static const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING = "onAppOpenAttribution";
 static const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR = "onAppOpenAttributionFailure";
 
-@interface AppsFlyerDelegate : NSObject <AppsFlyerTrackerDelegate>
+static const char * UNITY_SENDMESSAGE_OPEN_URL = "onAppOpenUrl";
+
+
+@interface AppsFlyerDelegate : NSObject <AppsFlyerTrackerDelegate, AppDelegateListener>
 
 @end

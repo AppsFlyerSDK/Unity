@@ -8,7 +8,27 @@
 
 #import "AppsFlyerDelegate.h"
 
+
+@interface AppsFlyerDelegate() {
+    BOOL didEnteredBackGround;
+}
+
+@end
+
 @implementation AppsFlyerDelegate
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleUserActivity:) name:UIApplicationLaunchOptionsUserActivityDictionaryKey object:nil];
+
+        UnityRegisterAppDelegateListener(self);
+        UnityRegisterLifeCycleListener(self);
+    }
+    return self;
+}
 
 
 - (void) onConversionDataReceived:(NSDictionary*) installData {
@@ -36,6 +56,42 @@
     NSLog (@"AppsFlyerDelegate onAppOpenAttributionFailure = %@", errDesc);
     UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR, [errDesc UTF8String]);
     
+}
+
+-(void) handleUserActivity:(NSNotification *) notification {
+    NSLog(@"got handleUserActivity = %@", notification.userInfo);
+    //[[AppsFlyerTracker sharedTracker] continueUserActivity:notification.userInfo restorationHandler:nil];
+}
+
+- (void)onOpenURL:(NSNotification*)notification {
+    NSLog(@"got onOpenURL = %@", notification.userInfo);
+    NSURL *url = notification.userInfo[@"url"];
+    NSString *sourceApplication = notification.userInfo[@"sourceApplication"];
+    
+    [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:nil];
+    
+}
+
+
+- (void)didReceiveRemoteNotification:(NSNotification*)notification {
+    NSLog(@"got didReceiveRemoteNotification = %@", notification.userInfo);
+    [[AppsFlyerTracker sharedTracker] handlePushNotification:notification.userInfo];
+}
+
+-(void)didBecomeActive:(NSNotification*)notification {
+    
+    if (didEnteredBackGround == YES) {
+        NSLog(@"got didBecomeActive = %@", notification.userInfo);
+        [[AppsFlyerTracker sharedTracker] trackAppLaunch];
+        didEnteredBackGround = NO;
+
+    }
+
+}
+
+- (void)didEnterBackground:(NSNotification*)notification {
+    NSLog(@"got didEnterBackground = %@", notification.userInfo);
+    didEnteredBackGround = YES;
 }
 
 
