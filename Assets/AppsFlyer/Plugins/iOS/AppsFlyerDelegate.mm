@@ -68,7 +68,9 @@
     NSURL *url = notification.userInfo[@"url"];
     NSString *sourceApplication = notification.userInfo[@"sourceApplication"];
     
-    [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:nil];
+    if (url != nil) {
+        [[AppsFlyerTracker sharedTracker] handleOpenURL:url sourceApplication:sourceApplication withAnnotation:nil];
+    }
     
 }
 

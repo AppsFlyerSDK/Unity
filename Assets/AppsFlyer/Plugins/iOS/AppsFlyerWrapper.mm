@@ -24,7 +24,6 @@ static AppsFlyerDelegate *mAppsFlyerdelegate;
     
     if (mAppsFlyerdelegate == nil) {
         mAppsFlyerdelegate = [[AppsFlyerDelegate alloc] init];
-        
     }
     return mAppsFlyerdelegate;
 }

@@ -35,7 +35,7 @@ public class AppsFlyerOverrideActivity extends UnityPlayerActivity {
                     String devKeyString = devKeyObj instanceof String ? (String)devKeyObj : devKeyObj.toString();
                     Log.i("AppsFlyerUnity", "devKeyString: "+ devKeyString);
 
-                    AppsFlyerLib.getInstance().init(this, devKeyString);
+                    AppsFlyerLib.getInstance().startTracking(this.getApplication(), devKeyString);
                     
                     AppsFlyerLib.getInstance().registerConversionListener(this,new AppsFlyerConversionListener() {
                         public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
