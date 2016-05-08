@@ -54,6 +54,7 @@ public class AppsFlyer : MonoBehaviour {
 	
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
+		print("AF.cs this is deprecated method. please use trackRichEvent instead.");
 	}
 	
 	public static void setCurrencyCode(string currencyCode){
@@ -134,14 +135,15 @@ public class AppsFlyer : MonoBehaviour {
 
 	
 	public static void trackEvent(string eventName,string eventValue){
-		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
-		{
-			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
-			{
-				cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, eventValue);
-			}
-		}
-		
+//		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
+//		{
+//			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) 
+//			{
+//				cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, eventValue);
+//			}
+//		}
+
+		print("AF.cs this is deprecated method. please use trackRichEvent instead. nothing is sent.");
 	}
 	
 	public static void setCurrencyCode(string currencyCode){
@@ -184,8 +186,8 @@ public class AppsFlyer : MonoBehaviour {
 		print("AF.cs init_cb");
 
 		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
-				cls_AppsFlyer.Call("init", cls_Activity, devKey);
+			using (AndroidJavaObject application = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity.getApplication()")) {
+				cls_AppsFlyer.Call("startTracking", application, devKey);
 			}
 		}
 	}
