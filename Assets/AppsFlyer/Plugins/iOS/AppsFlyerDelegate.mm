@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleUserActivity:) name:UIApplicationLaunchOptionsUserActivityDictionaryKey object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserActivity:) name:UIApplicationLaunchOptionsUserActivityDictionaryKey object:nil];
 
         UnityRegisterAppDelegateListener(self);
         UnityRegisterLifeCycleListener(self);
@@ -73,7 +73,6 @@
     }
     
 }
-
 
 - (void)didReceiveRemoteNotification:(NSNotification*)notification {
     NSLog(@"got didReceiveRemoteNotification = %@", notification.userInfo);

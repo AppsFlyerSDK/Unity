@@ -183,11 +183,14 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 	static void init_cb() {
-		print("AF.cs init_cb");
+
+		print("AF.cs start tracking");
+		trackAppLaunch ();
 
 		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-			using (AndroidJavaObject application = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity.getApplication()")) {
-				cls_AppsFlyer.Call("startTracking", application, devKey);
+			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
+				AndroidJavaObject cls_Application = cls_Activity.Call<AndroidJavaObject>("getApplication");
+				cls_AppsFlyer.Call("startTracking", cls_Application, devKey);
 			}
 		}
 	}
@@ -200,7 +203,11 @@ public class AppsFlyer : MonoBehaviour {
 	
 	public static void trackAppLaunch(){
 		print("AF.cs trackAppLaunch");
-		trackEvent(null, null);
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				cls_AppsFlyer.Call("trackAppLaunch",cls_Activity);
+			}
+		}		
 	}
 
 	public static void setAppID(string packageName){

@@ -80,7 +80,7 @@ AppsFlyer.validateReceipt(string productIdentifier, string price, string currenc
 
 <h3>Android:</h3>
 For Android call:
-<pre><code>AppsFlyer.validateReceipt(string googlePublicKey, string originalJson, string signature);
+<pre><code>AppsFlyer.validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency);
 </code></pre>
 
 Note: If you are <b><u>NOT</u></b> using Appsflyer Override Activity defined in the manifest.xml
