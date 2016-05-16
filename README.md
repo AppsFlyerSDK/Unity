@@ -53,7 +53,7 @@ Installation instructions for the AppsFlyer's plugin:
 
 	
 There is a sample project located here:
-https://github.com/AppsFlyerGit/AppsFlyerUnitySampleApp.git
+https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp.git
 
 
 <h2>Getting Conversion Data:</h2>
