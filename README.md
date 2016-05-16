@@ -3,12 +3,9 @@
 
 Whats new:
 
-V-4.3
-- Fixed Android build issue.
-- Updated iOS native SDK to v4.3.7
-
-
-For iOS: add the Security.framework
+V-4.8
+- Updated iOS native SDK to v4.4.1
+- Updated Android native SDK to v4.3.7
 
 
 Installation instructions for the AppsFlyer's plugin:
@@ -44,10 +41,10 @@ Installation instructions for the AppsFlyer's plugin:
 	// For your convinence (if your manifest is occupied) you can define AppsFlyer library
 	// here, use this commented out code.
 		
-	//AppsFlyer.setAppID ("YOUR_ANDROID_PACKAGE_NAME_HERE"); 
+	//AppsFlyer.init ("YOUR_ANDROID_PACKAGE_NAME_HERE"); 
 	//AppsFlyer.setIsDebug (true);
 	//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure");
-	//AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData", "didReceiveConversionDataWithError");
+	AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData", "didReceiveConversionDataWithError");
 
 	#endif
 }	</code></pre>
@@ -55,7 +52,8 @@ Installation instructions for the AppsFlyer's plugin:
 <h3>Important: The conversion data response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3>
 
 	
-There is a sample StartUp.cs sample file included in the project, please refer to it for more information.
+There is a sample project located here:
+https://github.com/AppsFlyerGit/AppsFlyerUnitySampleApp.git
 
 
 <h2>Getting Conversion Data:</h2>
