@@ -136,7 +136,7 @@ Set permissions mandatory (if missing):
 	//For permissions:
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE” />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 </code></pre>
 
 *READ_PHONE_STATE permission is optional.
