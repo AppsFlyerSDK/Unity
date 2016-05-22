@@ -17,10 +17,9 @@ Installation instructions for the AppsFlyer's plugin:
 
 <pre><code>void Start () {
 		
-	AppsFlyer.setAppsFlyerKey ("YOUR_APPSFLYER_DEV_KEY_HERE");
+	#if UNITY_IOS
 
-	#if UNITY_IOS 
-
+    AppsFlyer.setAppsFlyerKey ("YOUR_APPSFLYER_DEV_KEY_HERE");
 	AppsFlyer.setAppID ("YOUR_APP_ID_HERE");
 		
 	// For detailed logging
@@ -35,13 +34,9 @@ Installation instructions for the AppsFlyer's plugin:
 	AppsFlyer.trackAppLaunch ();
 
 	#elif UNITY_ANDROID
-		
-	// All Initialization occur in the override activity defined in the mainfest.xml, 
-	// including the track app launch
-	// For your convinence (if your manifest is occupied) you can define AppsFlyer library
-	// here, use this commented out code.
-		
-	//AppsFlyer.init ("YOUR_ANDROID_PACKAGE_NAME_HERE"); 
+	AppsFlyer.init ("YOUR_APPSFLYER_DEV_KEY_HERE"); 
+    AppsFlyer.setAppID ("YOUR_ANDROID_PACKAGE_NAME_HERE"); 
+
 	//AppsFlyer.setIsDebug (true);
 	//AppsFlyer.createValidateInAppListener ("AppsFlyerTrackerCallbacks", "onInAppBillingSuccess", "onInAppBillingFailure");
 	AppsFlyer.loadConversionData("AppsFlyerTrackerCallbacks","didReceiveConversionData", "didReceiveConversionDataWithError");
@@ -51,15 +46,11 @@ Installation instructions for the AppsFlyer's plugin:
 
 <h3>Important: The conversion data response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3>
 
-	
-There is a sample project located here:
-https://github.com/AppsFlyerGit/AppsFlyerUnitySampleApp.git
-
-
 <h2>Getting Conversion Data:</h2>
 
-To load AppsFlyer's conversion data from it's servers:
-Add Empty Object call it AppsFlyerTrackerCallbacks, and attach to it the AppsFlyerTrackerCallbacks.cs which is included in the project, for more information, please refer to the sample scene provided with the project.
+To load AppsFlyer's conversion data from its servers:
+Add Empty Object and attach to it the AppsFlyerTrackerCallbacks.cs which is included in the project.
+For more information, please refer to the <a href="https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp">Sample Project</a>.
 
 <pre><code>public void didReceiveConversionData(string conversionData) {
 	print ("AppsFlyerTrackerCallbacks:: got conversion data = " + conversionData);
@@ -116,44 +107,47 @@ Settings the user ID as used by the app:
 
 #For Android:
 
-The Android Override Activity in the manifest sends the <b>TrackAppLaunch()</b> automatically. <br>
-Set the Dev_Key in the manifest. 
-		
+Set the AF receiver and permissions (Mandatory):
+
+    <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+    <intent-filter>
+    <action android:name="com.android.vending.INSTALL_REFERRER" />
+    </intent-filter>
+    </receiver>
+    // receiver should be inside the <application> tag
+
+    //For permissions:
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+<h3>ADVANCED FEATURES:</h3>
+
+You can set your Dev Key using your Manifest:
+
 	<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
 
 
-If your manifest file is occupied by other services, you can initialize the Appsflyer tracker manually in the startup script and call <b> AppsFlyer.trackAppLaunch ();</b> explicitly. <br>Remove all related code from the manifest besides the receiver tag which holds the reffer information.
+If you wish to avoid adding any initialization code, you can use AppsFlyer's Override Activity explicitly (Optional):
 
-Set permissions mandatory (if missing):
-
-	<pre><code><receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
-	<intent-filter>
-		<action android:name="com.android.vending.INSTALL_REFERRER" />
-	</intent-filter>
-	</receiver>
-	// inside the <application> tag
-	
-	//For permissions:
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE” />
-</code></pre>
-
-*READ_PHONE_STATE permission is optional.
-Adding this permission will enable Carrier tracking Android_id and IMEI (required for tracking out of Google Play)
-
-<h3> To collect Google advertising ID</h3>
-
-Integrate Google Play Services. 
-
-Open the Android SDK manager, scroll down to the Extras folder and verify that you have downloaded the Google Play Services package. See http://developer.android.com/google/play-services/setup.html. Uncomment the following line in the AndroidManifest.xml file:
-
-	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+    <activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
+    <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    </activity>
 
 
-Pelase refer to SDK integration guides for complete API documentation.
+ #Additional Links:
+
+SDK integration guides for complete API documentation:
 
 [iOS Integration Guide](http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-).
 
 [Android Integration Guide](http://support.appsflyer.com/entries/22801952-Android-SDK-Integration-Guide).
+
+Unity Sample Project:
+
+[Android Integration Guide](https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp).
 
