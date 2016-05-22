@@ -154,5 +154,5 @@ SDK integration guides for complete API documentation:
 
 Unity Sample Project:
 
-[Android Integration Guide](https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp).
+[Sample Project](https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp).
 
