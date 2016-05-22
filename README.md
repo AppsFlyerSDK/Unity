@@ -46,6 +46,11 @@ Installation instructions for the AppsFlyer's plugin:
 
 <h3>Important: The conversion data response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3>
 
+	
+There is a sample project located here:
+https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp.git
+
+
 <h2>Getting Conversion Data:</h2>
 
 To load AppsFlyer's conversion data from its servers:
