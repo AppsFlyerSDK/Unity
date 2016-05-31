@@ -21,9 +21,7 @@
 {
     self = [super init];
     if (self) {
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUserActivity:) name:UIApplicationLaunchOptionsUserActivityDictionaryKey object:nil];
-
+    
         UnityRegisterAppDelegateListener(self);
         UnityRegisterLifeCycleListener(self);
     }
@@ -58,10 +56,6 @@
     
 }
 
--(void) handleUserActivity:(NSNotification *) notification {
-    NSLog(@"got handleUserActivity = %@", notification.userInfo);
-    //[[AppsFlyerTracker sharedTracker] continueUserActivity:notification.userInfo restorationHandler:nil];
-}
 
 - (void)onOpenURL:(NSNotification*)notification {
     NSLog(@"got onOpenURL = %@", notification.userInfo);
