@@ -226,13 +226,13 @@ public class AppsFlyer : MonoBehaviour {
 	}
 	
 
-	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency) {
+	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string, string> additionalParametes) {
 		print ("AF.cs validateReceipt pk = " + publicKey + " data = " + purchaseData + "sig = " + signature);
 		
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
 				print ("inside cls_activity");
-				cls_AppsFlyer.Call("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, null);
+				cls_AppsFlyer.Call("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, additionalParametes);
 			}
 		}		
 	}
