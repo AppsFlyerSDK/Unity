@@ -51,7 +51,9 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mHandlePushNotification(string payload);
 
-	
+	[DllImport("__Internal")]
+	private static extern void mRegisterUninstall(string pushToken);
+
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
 		print("AF.cs this is deprecated method. please use trackRichEvent instead.");
@@ -124,6 +126,10 @@ public class AppsFlyer : MonoBehaviour {
 			attributesString += kvp.Key + "=" + kvp.Value + "\n";
 		}
 		mHandlePushNotification(attributesString);
+	}
+
+	public static void registerUninstall(string token) {
+		mRegisterUninstall(token);
 	}
 
 	#elif UNITY_ANDROID
@@ -205,7 +211,7 @@ public class AppsFlyer : MonoBehaviour {
 		print("AF.cs trackAppLaunch");
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
-				cls_AppsFlyer.Call("trackAppLaunch",cls_Activity);
+				cls_AppsFlyer.Call("trackAppLaunch",cls_Activity, devKey);
 			}
 		}		
 	}
@@ -310,6 +316,27 @@ public class AppsFlyer : MonoBehaviour {
 			}
 		}
 		return appsFlyerId;
+	}
+
+	public static void setGCMProjectNumber(string googleGCMNumber) {
+		cls_AppsFlyer.Call("setGCMProjectNumber", googleGCMNumber);
+	}
+
+	public static void sendDeepLinkData_cb() {
+		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
+			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
+				cls_AppsFlyer.Call ("sendDeepLinkData", cls_Activity);
+			}
+		}
+	}
+
+	public static void sendDeepLinkData(){
+		print("AF.cs sendDeepLinkData");
+		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
+			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
+				cls_Activity.Call("runOnUiThread", new AndroidJavaRunnable(sendDeepLinkData_cb));
+			}
+		}
 	}
 
 	#else
