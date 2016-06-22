@@ -187,6 +187,11 @@ extern "C" {
         
     }
 
+    const void mRegisterUninstall (const char *pushToken) {
+        NSString *token = [NSString stringWithUTF8String:pushToken];
+        NSData *tokenData = [token dataUsingEncoding:NSUTF8StringEncoding];
+        [[AppsFlyerTracker sharedTracker] registerUninstall:tokenData];
+    }
     
     char* cStringCopy(const char* string)
     {
