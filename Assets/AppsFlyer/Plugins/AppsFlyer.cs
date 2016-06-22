@@ -226,39 +226,54 @@ public class AppsFlyer : MonoBehaviour {
 	}
 	
 
-	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string, string> additionalParametes) {
+	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string,string> extraParams) {
 		print ("AF.cs validateReceipt pk = " + publicKey + " data = " + purchaseData + "sig = " + signature);
 		
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				AndroidJavaObject convertedDict = null;
+				if (extraParams != null) {
+					convertedDict = ConvertHashMap (extraParams);
+				}
 				print ("inside cls_activity");
-				cls_AppsFlyer.Call("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, additionalParametes);
+				cls_AppsFlyer.Call("validateAndTrackInAppPurchase",cls_Activity, publicKey, signature, purchaseData, price, currency, convertedDict);
 			}
 		}		
 	}
 	
+	
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){
+		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+				AndroidJavaObject convertedDict = ConvertHashMap (eventValues);
+				cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, convertedDict);
+			}
+		}	
+	}
+	
+	//turn a dictionary into hashmap, to pass it in JNI
+	private static AndroidJavaObject ConvertHashMap(Dictionary<string,string> dict)
+	{
+		AndroidJavaObject obj_HashMap = new AndroidJavaObject("java.util.HashMap");
 		
-		using(AndroidJavaObject obj_HashMap = new AndroidJavaObject("java.util.HashMap")) {
-			IntPtr method_Put = AndroidJNIHelper.GetMethodID(obj_HashMap.GetRawClass(), "put", 
-			                                                 "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
-			object[] args = new object[2];
-			foreach(KeyValuePair<string, string> kvp in eventValues){
-				using(AndroidJavaObject k = new AndroidJavaObject("java.lang.String", kvp.Key)){
-					using(AndroidJavaObject v = new AndroidJavaObject("java.lang.String", kvp.Value)){
-						args[0] = k;
-						args[1] = v;
-						AndroidJNI.CallObjectMethod(obj_HashMap.GetRawObject(), 
-						                            method_Put, AndroidJNIHelper.CreateJNIArgArray(args));
-					}
+		IntPtr method_Put = AndroidJNIHelper.GetMethodID(obj_HashMap.GetRawClass(), "put", 
+		                                                 "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+		
+		object[] args = new object[2];
+		foreach(KeyValuePair<string, string> kvp in dict)
+		{
+			using(AndroidJavaObject k = new AndroidJavaObject("java.lang.String", kvp.Key))
+			{
+				using(AndroidJavaObject v = new AndroidJavaObject("java.lang.String", kvp.Value))
+				{
+					args[0] = k;
+					args[1] = v;
+					AndroidJNI.CallObjectMethod(obj_HashMap.GetRawObject(), 
+					                            method_Put, AndroidJNIHelper.CreateJNIArgArray(args));
 				}
 			}
-			using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
-				using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
-					cls_AppsFlyer.Call("trackEvent",cls_Activity, eventName, obj_HashMap);
-				}
-			}		
 		}
+		return obj_HashMap;
 	}
 
 	public static void setImeiData(string imeiData) {
