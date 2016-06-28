@@ -3,9 +3,11 @@
 
 Whats new:
 
-V-4.8
-- Updated iOS native SDK to v4.4.1
-- Updated Android native SDK to v4.3.7
+V-4.9.3
+- Updated iOS native SDK to v4.5.0
+- Updated Android native SDK to v4.4.0
+- Fixed issue with Unity 4.x.x
+- Added additional parameters to the validate in app purchase.
 
 
 Installation instructions for the AppsFlyer's plugin:
@@ -74,7 +76,7 @@ AppsFlyer.validateReceipt(string productIdentifier, string price, string currenc
 
 <h3>Android:</h3>
 For Android call:
-<pre><code>AppsFlyer.validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency);
+<pre><code>AppsFlyer.validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string,string> additionalParametes);
 </code></pre>
 
 Note: If you are <b><u>NOT</u></b> using Appsflyer Override Activity defined in the manifest.xml
