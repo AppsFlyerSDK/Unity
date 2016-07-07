@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class AppsFlyer : MonoBehaviour {
 	
 	
-	#if UNITY_IOS
+	#if UNITY_IOS && !UNITY_EDITOR
 	[DllImport("__Internal")]
 	private static extern void mTrackEvent(string eventName,string eventValue);
 	
@@ -132,7 +132,7 @@ public class AppsFlyer : MonoBehaviour {
 		mRegisterUninstall(token);
 	}
 
-	#elif UNITY_ANDROID
+	#elif UNITY_ANDROID && !UNITY_EDITOR
 
 	private static AndroidJavaClass obj = new AndroidJavaClass ("com.appsflyer.AppsFlyerLib");
 	private static AndroidJavaObject cls_AppsFlyer = obj.CallStatic<AndroidJavaObject>("getInstance");
@@ -340,16 +340,25 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 	#else
-	
+	//editor
+	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string,string> extraParams) {}
+	public static void validateReceipt(string productIdentifier, string price, string currency, string transactionId, Dictionary<string,string> additionalParametes) {}
+	public static void handlePushNotification(Dictionary<string, string> payload) {}
+	public static void registerUninstall(string token) {}
+	public static void setCollectIMEI (bool shouldCollect) {}
+	public static void createValidateInAppListener(string aObject, string callbackMethod, string callbackFailedMethod){}
+	public static void init (string devKey){}
+	public static void sendDeepLinkData(){}
+	public static void setGCMProjectNumber(string googleGCMNumber){}
+	public static void setImeiData(string imeiData){}
 	public static void trackEvent(string eventName,string eventValue){}
 	public static void setCurrencyCode(string currencyCode){}
 	public static void setCustomerUserID(string customerUserID){}
-	public static void loadConversionData(string callbackObject,string callbackMethod){}
+	public static void loadConversionData(string callbackObject,string callbackMethod, string callbackFailedMethod){}
 	public static void setAppsFlyerKey(string key){}
 	public static void trackAppLaunch(){}
 	public static void setAppID(string appleAppId){}
 	public static void trackRichEvent(string eventName, Dictionary<string, string> eventValues){}
-	public static void validateReceipt(string productIdentifier, string price, string currency){}
 	public static void setIsDebug(bool isDebug){}
 	public static void setIsSandbox(bool isSandbox){}
 	public static void getConversionData (){}
