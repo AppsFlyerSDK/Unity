@@ -45,7 +45,7 @@
 
 - (void) onAppOpenAttribution:(NSDictionary*) attributionData {
     NSString *attrData = [self getJsonStringFromDictionary:attributionData];
-    NSLog (@"AppsFlyerDelegate onConversionDataReceived = %@", attrData);
+    NSLog (@"AppsFlyerDelegate onAppOpenAttribution = %@", attrData);
     UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_RETARGETTING, [attrData UTF8String]);
 }
 

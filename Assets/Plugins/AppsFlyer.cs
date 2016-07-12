@@ -322,23 +322,6 @@ public class AppsFlyer : MonoBehaviour {
 		cls_AppsFlyer.Call("setGCMProjectNumber", googleGCMNumber);
 	}
 
-	public static void sendDeepLinkData_cb() {
-		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
-				cls_AppsFlyer.Call ("sendDeepLinkData", cls_Activity);
-			}
-		}
-	}
-
-	public static void sendDeepLinkData(){
-		print("AF.cs sendDeepLinkData");
-		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
-				cls_Activity.Call("runOnUiThread", new AndroidJavaRunnable(sendDeepLinkData_cb));
-			}
-		}
-	}
-
 	#else
 	
 	public static void trackEvent(string eventName,string eventValue){}

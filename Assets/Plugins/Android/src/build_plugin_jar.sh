@@ -19,6 +19,7 @@ javac *.java -classpath $CLASSPATH -d .
 
 javap -s com.appsflyer.AppsFlyerOverrideActivity
 javap -s com.appsflyer.AppsFlyerUnityHelper
+javap -s com.appsflyer.GetDeepLinkingActivity
 
 echo "Manifest-Version: 1.0" > MANIFEST.MF
 
