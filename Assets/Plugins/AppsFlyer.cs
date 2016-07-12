@@ -331,7 +331,6 @@ public class AppsFlyer : MonoBehaviour {
 	public static void setCollectIMEI (bool shouldCollect) {}
 	public static void createValidateInAppListener(string aObject, string callbackMethod, string callbackFailedMethod){}
 	public static void init (string devKey){}
-	public static void sendDeepLinkData(){}
 	public static void setGCMProjectNumber(string googleGCMNumber){}
 	public static void setImeiData(string imeiData){}
 	public static void trackEvent(string eventName,string eventValue){}
