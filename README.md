@@ -6,13 +6,7 @@ Whats new:
 V-4.10.0 <br>
 - Deep link support for Android & iOS<br>
 - Uninstall support for Android & iOS<br>
-- Fixed running on Unity Editor<br>
-
-V-4.9.3 <br>
-- Updated iOS native SDK to v4.5.0<br>
-- Updated Android native SDK to v4.4.0<br>
-- Fixed issue with Unity 4.x.x<br>
-- Added additional parameters to the validate in app purchase.<br>
+- Support testing using the Unity Editor<br>
 
 
 Installation instructions for the AppsFlyer's plugin:
@@ -58,7 +52,7 @@ There is a sample project located here:
 https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp.git
 
 
-<h2>Getting Conversion Data:</h2>
+<h2>Getting Conversion Data</h2>
 
 To load AppsFlyer's conversion data from its servers:
 Add Empty Object and attach to it the AppsFlyerTrackerCallbacks.cs which is included in the project.
@@ -75,6 +69,7 @@ For more information, please refer to the <a href="https://github.com/AppsFlyerS
 <h3>iOS:</h3>
 
 For testing make sure you test against Apple sandbox server call:
+
 <pre><code>AppsFlyer.setIsSandbox(true);
 AppsFlyer.validateReceipt(string productIdentifier, string price, string currency, string transactionId, Dictionary<string,string> additionalParametes);
 </code></pre>
@@ -94,18 +89,18 @@ you should call this code in order to initialize the callback response:
 <h3>The validate purchase response will be triggered in the AppsFlyerTrackerCallbacks.cs class.</h3>
 
 
-Track Event API:
----------------
+<h2> Track Event API:</h2>
+
 
 Tracking event example:
-		
-	System.Collections.Generic.Dictionary<string, string> purchaseEvent = new System.Collections.Generic.Dictionary<string, string> ();
+	
+	System.Collections.Generic.Dictionary<string, string> purchaseEvent = new 	System.Collections.Generic.Dictionary<string, string> ();
 	purchaseEvent.Add ("af_currency", "USD");
 	purchaseEvent.Add ("af_revenue", "0.99");
 	purchaseEvent.Add ("af_quantity", "1");
 	AppsFlyer.trackRichEvent ("af_purchase", purchaseEvent);
-
-
+	
+	
 Setting user local currency code for in app purchases:
 The currency code should be a 3 character ISO 4217 code. (default is USD)    
 <pre><code>AppsFlyer.setCurrencyCode("GBP");
@@ -133,20 +128,20 @@ Set the AF receiver and permissions (Mandatory):
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
-<h3>ADVANCED FEATURES:</h3>
+<h2> Deep Linking </h2>
+<h3>ios:</h3>
+For ios please follow the [iOS Integration Guide](http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-) for adding schemes in xCode.
 
-You can set your Dev Key using your Manifest:
+<h3>Android:</h3>
+Add to your manifest file the following:
 
-	<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
-
-
-If you wish to avoid adding any initialization code, you can use AppsFlyer's Override Activity explicitly (Optional):
-
-    <activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode="singleTop" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
-    <intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-    <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
+	<activity android:name="com.appsflyer.GetDeepLinkingActivity" android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="your_scheme" />
+      </intent-filter>
     </activity>
 
 
@@ -160,20 +155,20 @@ Call AppsFlyer.registerUninstall("device_push_notification_token");
 <br> For more details please refer<br> [iOS Un-install guide](https://support.appsflyer.com/hc/en-us/articles/211211963-iOS-Uninstall-Tracking).
 
 
-<h2> Deep Linking </h2>
-<h3>ios</h3>
-For ios please follow the [iOS Integration Guide](http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-) for adding schemes in xCode.
+<h2>ADVANCED FEATURES:</h2>
 
-<h3>Android:</h3>
-Add to your manifest file the following:
+You can set your Dev Key using your Manifest:
 
-	<activity android:name="com.appsflyer.GetDeepLinkingActivity" android:exported="true">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="your_scheme" />
-      </intent-filter>
+	<meta-data android:name="AppsFlyerDevKey" android:value="YOUR_DEV_KEY_HERE"/>
+
+
+If you wish to avoid adding any initialization code, you can use AppsFlyer's Override Activity explicitly (Optional):
+
+    <activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode="singleTop" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
+    <intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
     </activity>
 
 
