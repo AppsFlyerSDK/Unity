@@ -3,11 +3,16 @@
 
 Whats new:
 
-V-4.9.3
-- Updated iOS native SDK to v4.5.0
-- Updated Android native SDK to v4.4.0
-- Fixed issue with Unity 4.x.x
-- Added additional parameters to the validate in app purchase.
+V-4.10.0 <br>
+- Deep link support for Android & iOS<br>
+- Uninstall support for Android & iOS<br>
+- Fixed running on Unity Editor<br>
+
+V-4.9.3 <br>
+- Updated iOS native SDK to v4.5.0<br>
+- Updated Android native SDK to v4.4.0<br>
+- Fixed issue with Unity 4.x.x<br>
+- Added additional parameters to the validate in app purchase.<br>
 
 
 Installation instructions for the AppsFlyer's plugin:
@@ -112,7 +117,7 @@ Settings the user ID as used by the app:
 
 
 
-#For Android:
+<h3>Android:</h3>
 
 Set the AF receiver and permissions (Mandatory):
 
@@ -126,7 +131,6 @@ Set the AF receiver and permissions (Mandatory):
     //For permissions:
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 
 <h3>ADVANCED FEATURES:</h3>
@@ -138,7 +142,7 @@ You can set your Dev Key using your Manifest:
 
 If you wish to avoid adding any initialization code, you can use AppsFlyer's Override Activity explicitly (Optional):
 
-    <activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
+    <activity android:name="com.appsflyer.AppsFlyerOverrideActivity" android:launchMode="singleTop" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
     <intent-filter>
     <action android:name="android.intent.action.MAIN" />
     <category android:name="android.intent.category.LAUNCHER" />
@@ -146,7 +150,34 @@ If you wish to avoid adding any initialization code, you can use AppsFlyer's Ove
     </activity>
 
 
- #Additional Links:
+<h2> Un-install </h2>
+<h3>Android:</h3>
+Call AppsFlyer.setGCMProjectNumber("Your_GCM_Project_Number");
+<br> For more details please refer<br> [Android Un-install guide](https://support.appsflyer.com/hc/en-us/articles/208004986-Android-Uninstall-Tracking).
+
+<h3>iOS:</h3>
+Call AppsFlyer.registerUninstall("device_push_notification_token");
+<br> For more details please refer<br> [iOS Un-install guide](https://support.appsflyer.com/hc/en-us/articles/211211963-iOS-Uninstall-Tracking).
+
+
+<h2> Deep Linking </h2>
+<h3>ios</h3>
+For ios please follow the [iOS Integration Guide](http://support.appsflyer.com/entries/25458906-iOS-SDK-Integration-Guide-v2-5-3-x-New-API-) for adding schemes in xCode.
+
+<h3>Android:</h3>
+Add to your manifest file the following:
+
+	<activity android:name="com.appsflyer.GetDeepLinkingActivity" android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="your_scheme" />
+      </intent-filter>
+    </activity>
+
+
+#Additional Links:
 
 SDK integration guides for complete API documentation:
 
