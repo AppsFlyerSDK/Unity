@@ -188,7 +188,8 @@ extern "C" {
     }
 
     const void mRegisterUninstall (unsigned char *pushToken) {
-        NSData* tokenData = [NSData dataWithBytes:(const void *)pushToken length:sizeof(unsigned char)*32];
+        const int tokenSize = 32;
+        NSData* tokenData = [NSData dataWithBytes:(const void *)pushToken length:sizeof(unsigned char)*tokenSize];
         [[AppsFlyerTracker sharedTracker] registerUninstall:tokenData];
     }
     
