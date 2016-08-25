@@ -1,7 +1,9 @@
 
 <h2>Integrating AppsFlyer Plugin into Unity Project</h2>
 
-Whats new:
+Whats new:<br>
+V-4.10.1 <br>
+- Fixed push token for iOS uninnstall
 
 V-4.10.0 <br>
 - Deep link support for Android & iOS<br>
