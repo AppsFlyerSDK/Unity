@@ -52,7 +52,7 @@ public class AppsFlyer : MonoBehaviour {
 	private static extern void mHandlePushNotification(string payload);
 
 	[DllImport("__Internal")]
-	private static extern void mRegisterUninstall(string pushToken);
+	private static extern void mRegisterUninstall(byte[] pushToken);
 
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
@@ -128,7 +128,7 @@ public class AppsFlyer : MonoBehaviour {
 		mHandlePushNotification(attributesString);
 	}
 
-	public static void registerUninstall(string token) {
+	public static void registerUninstall(byte[] token) {
 		mRegisterUninstall(token);
 	}
 
@@ -327,7 +327,7 @@ public class AppsFlyer : MonoBehaviour {
 	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string,string> extraParams) {}
 	public static void validateReceipt(string productIdentifier, string price, string currency, string transactionId, Dictionary<string,string> additionalParametes) {}
 	public static void handlePushNotification(Dictionary<string, string> payload) {}
-	public static void registerUninstall(string token) {}
+	public static void registerUninstall(byte[] token) {}
 	public static void setCollectIMEI (bool shouldCollect) {}
 	public static void createValidateInAppListener(string aObject, string callbackMethod, string callbackFailedMethod){}
 	public static void init (string devKey){}
