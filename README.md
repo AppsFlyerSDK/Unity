@@ -6,7 +6,9 @@
 
 <br></br>
 
-Whats new:
+Whats new:<br>
+V-4.10.1 <br>
+- Fixed push token for iOS uninstall
 
 V-4.10.0 <br>
 - Deep link support for Android & iOS<br>
