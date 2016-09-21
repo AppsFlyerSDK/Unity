@@ -2,7 +2,7 @@
 //  AppsFlyerTracker.h
 //  AppsFlyerLib
 //
-//  AppsFlyer iOS SDK v4.5.1
+//  AppsFlyer iOS SDK v4.5.5
 //  29-Jun-2016
 //  Copyright (c) 2013 AppsFlyer Ltd. All rights reserved.
 //
@@ -99,6 +99,7 @@ typedef enum  {
     BOOL _isDebug;
     BOOL didCollectIAdData;
     BOOL _useReceiptValidationSandbox;
+    BOOL _useUninstallSandbox;
     EmailCryptType emailCryptType;
     NSArray *userEmails;
 }
@@ -169,6 +170,12 @@ typedef enum  {
 @property (nonatomic, setter = setUseReceiptValidationSandbox:) BOOL useReceiptValidationSandbox;
 
 
+/*
+ * Set this flag to test uninstall on Apple environment (production or sandbox). The default value
+ * is NO.
+ */
+@property (nonatomic, setter = setUseUninstallSandbox:) BOOL useUninstallSandbox;
+
 
 /*
  * Use this to send the User's emails
@@ -208,12 +215,11 @@ typedef enum  {
 /*
 * To Track location for geo-fencing.
 */
+- (void) trackLocation:(double) longitude latitude:(double) latitude;
 
--(void) trackLocation:(double) longitude latitude:(double) latitude;
 /*
  * This method returns AppsFLyer's internal user ID (unique for your app)
  */
-
 - (NSString *) getAppsFlyerUID;
 
 /* 
@@ -236,18 +242,20 @@ typedef enum  {
  * For Universal links iOS 9
  */
 
--(void) continueUserActivity:(NSUserActivity *) userActivity restorationHandler:(void (^)(NSArray *))restorationHandler NS_AVAILABLE_IOS(9_0);
--(void) didUpdateUserActivity:(NSUserActivity *)userActivity NS_AVAILABLE_IOS(9_0);
--(void) handlePushNotification:(NSDictionary *) pushPayload;
+- (BOOL) continueUserActivity:(NSUserActivity *) userActivity restorationHandler:(void (^)(NSArray *))restorationHandler NS_AVAILABLE_IOS(9_0);
+- (void) didUpdateUserActivity:(NSUserActivity *)userActivity NS_AVAILABLE_IOS(9_0);
+- (void) handlePushNotification:(NSDictionary *) pushPayload;
 
 
 /* 
   Register uninstall - you should register for remote notification and provide Appsflyer the push device token.
 */
--(void) registerUninstall:(NSData *) deviceToken;
+- (void) registerUninstall:(NSData *) deviceToken;
 
- 
- 
+/*
+ Get SDK version.
+*/
+- (NSString *) getSDKVersion;
 
 
 @end

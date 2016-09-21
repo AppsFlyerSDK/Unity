@@ -11,6 +11,9 @@
 
 <br>
 
+Android SDK v. 4.6.0 <br>
+iOS SDK v. 4.5.5 <br>
+
 Whats new:<br>
 V-4.10.1 <br>
 - Fixed push token for iOS uninstall
