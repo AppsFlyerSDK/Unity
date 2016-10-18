@@ -22,6 +22,11 @@
     return YES;
 }
 
+-(BOOL) application:(UIApplication *)application openUrl:(NSURL *)url options:(NSDictionary *)options {
+    [[AppsFlyerTracker sharedTracker] handleOpenUrl:url options:options];
+    return YES;
+}
+
 @end
 
 IMPL_APP_CONTROLLER_SUBCLASS(AppsFlyerAppController)
