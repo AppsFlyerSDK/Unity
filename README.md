@@ -10,14 +10,17 @@
 <a href="https://support.appsflyer.com/hc/en-us/articles/213766183-Unity"><font size="4"><b>Unity Plugin Integration Guide.</b></font></a>
 
 <br>
-Whats new:<br>
-v-4.11.0<br>
+Release notes:<br>
+V-4.12.0 <br>
+- Update Appsflyer iOS SDK version to 4.5.9<br>
+- Supports Apple Search ads <br>
+
+V-4.11.0<br>
 - Added support for universal deeplinking.<br>
 - Android SDK v. 4.6.0 <br>
 - iOS SDK v. 4.5.5 <br>
 
 
-Whats new:<br>
 V-4.10.1 <br>
 - Fixed push token for iOS uninstall
 
