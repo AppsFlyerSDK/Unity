@@ -11,6 +11,11 @@
 
 <br>
 Release notes:<br>
+V-4.13.0 <br>
+- Update Appsflyer iOS SDK version to 4.5.12<br>
+- Update Appsflyer Android SDK version to 4.6.1 <br>
+- Fixed Android un-install
+
 V-4.12.0 <br>
 - Update Appsflyer iOS SDK version to 4.5.9<br>
 - Supports Apple Search ads <br>
