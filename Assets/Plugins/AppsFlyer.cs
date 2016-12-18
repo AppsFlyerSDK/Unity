@@ -159,16 +159,23 @@ public class AppsFlyer : MonoBehaviour {
 	public static void  setCustomerUserID(string customerUserID){
 		cls_AppsFlyer.Call("setAppUserId", customerUserID);
 	}
-	
-	public static void loadConversionData(string callbackObject,string callbackMethod, string callbackFailedMethod){
+
+
+	public static void loadConversionData(string callbackObject){
 		using(AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) 
 		{
 			using(AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
-				cls_AppsFlyerHelper.CallStatic("createConversionDataListener", cls_Activity, callbackObject, callbackMethod, callbackFailedMethod);	
+				cls_AppsFlyerHelper.CallStatic("createConversionDataListener", cls_Activity, callbackObject);	
 			}
 		}
 	}
-	
+
+	[System.Obsolete("Use loadConversionData(string callbackObject)")]
+	public static void loadConversionData(string callbackObject, string callbackMethod, string callbackFailedMethod){
+		loadConversionData(callbackObject);
+	}
+	                                    
+
 	public static void setCollectIMEI (bool shouldCollect) {
 		cls_AppsFlyer.Call("setCollectIMEI", shouldCollect);
 	}
@@ -336,7 +343,9 @@ public class AppsFlyer : MonoBehaviour {
 	public static void trackEvent(string eventName,string eventValue){}
 	public static void setCurrencyCode(string currencyCode){}
 	public static void setCustomerUserID(string customerUserID){}
-	public static void loadConversionData(string callbackObject,string callbackMethod, string callbackFailedMethod){}
+	public static void loadConversionData(string callbackObject){}
+	[System.Obsolete("Use loadConversionData(string callbackObject)")]
+	public static void loadConversionData(string callbackObject, string callbackMethod, string callbackFailedMethod){}
 	public static void setAppsFlyerKey(string key){}
 	public static void trackAppLaunch(){}
 	public static void setAppID(string appleAppId){}
