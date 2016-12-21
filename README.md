@@ -1,5 +1,8 @@
 
-<img src="https://www.appsflyer.com/wp-content/themes/ohav-child/images/logo.svg"  width="200">
+<p align="center">
+  <img height="75" src="repository_assets/AF_color_medium.png" />
+</p>
+-----------
 
 
 <h1>Unity Plugin</h1>
@@ -11,6 +14,10 @@
 
 <br>
 Release notes:<br>
+V-4.14.0 <br>
+- Update Appsflyer Android SDK version to 4.6.2 <br>
+- Fixed Android Deeplink callbacks.
+
 V-4.13.0 <br>
 - Update Appsflyer iOS SDK version to 4.5.12<br>
 - Update Appsflyer Android SDK version to 4.6.1 <br>
