@@ -14,6 +14,10 @@
 
 <br>
 Release notes:<br>
+V-4.15.0 <br>
+- Update Appsflyer Android SDK version to 4.7.2.221 <br>
+- Update Appsflyer iOS SDK version to 4.7.3 <br>
+
 V-4.14.0 <br>
 - Update Appsflyer Android SDK version to 4.6.2 <br>
 - Fixed Android Deeplink callbacks.
