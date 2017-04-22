@@ -186,13 +186,21 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 	public static void init(string key){
-		print("AF.cs init");
-		devKey = key;
-		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
-			using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
-				cls_Activity.Call("runOnUiThread", new AndroidJavaRunnable(init_cb));
-			}
-		}
+	print("before");
+	bool defaultLaunchProtectEnabled = true;
+	afPropertiesInstance.Call("set", "launchProtectEnabled", false);
+	print("done");
+	print("set launchProtectEnabled = " 
+	+ afPropertiesInstance.Call <bool> ("getBoolean", "launchProtectEnabled", defaultLaunchProtectEnabled));
+	print("after");
+
+	print("AF.cs init");
+	devKey = key;
+	using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
+	using (AndroidJavaObject cls_Activity = cls_UnityPlayer.GetStatic<AndroidJavaObject> ("currentActivity")) {
+	cls_Activity.Call("runOnUiThread", new AndroidJavaRunnable(init_cb));
+	}
+	}
 	}
 
 	static void init_cb() {
