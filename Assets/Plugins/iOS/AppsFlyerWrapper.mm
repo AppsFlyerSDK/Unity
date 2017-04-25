@@ -123,10 +123,9 @@ extern "C" {
             NSData *jsonData;
             
             NSError *jsonError;
-            jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
-                                                           options:0
-                                                             error:&jsonError];
-            
+            jsonData = [NSJSONSerialization dataWithJSONObject:result
+                                                       options:0
+                                                         error:&jsonError];            
             if (jsonError)
             {
                 NSLog(@"JSON parse error");
