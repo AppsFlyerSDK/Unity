@@ -140,21 +140,26 @@ extern "C" {
           }
           failure:^(NSError *error, id response)
           {
-            NSLog(@"response = %@", response);
             NSString *errorString;
-            if ([response objectForKey:@"error"] != nil)
-            {
-                errorString = response[@"error"];
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                if ([response objectForKey:@"error"] != nil)
+                {
+                    errorString = response[@"error"];
+                }
+                else if ([response objectForKey:@"status"] != nil)
+                {
+                    errorString = [NSString stringWithFormat:@"Error code = %@", response[@"status"]];
+                }
             }
-            else if ([response objectForKey:@"status"] != nil)
-            {
-                errorString = [NSString stringWithFormat:@"Error code = %@", response[@"status"]];
+            else if ([response isKindOfClass:[NSData class]]) {
+                errorString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             }
             else
             {
                 errorString = @"Unknown Error";
             }
-            
+            NSLog(@"response = %@", errorString);
+   
             UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [errorString UTF8String]);
         }];
     }
