@@ -13,6 +13,14 @@
 <a href="https://support.appsflyer.com/hc/en-us/articles/213766183-Unity"><font size="4"><b>Unity Plugin Integration Guide.</b></font></a>
 
 <br>
+
+----------
+In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com
+
+*When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
+
+----------
+
 Release notes:<br>
 V-4.15.0 <br>
 - Update Appsflyer Android SDK version to 4.7.2.221 <br>
