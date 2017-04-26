@@ -154,6 +154,9 @@ extern "C" {
             else if ([response isKindOfClass:[NSData class]]) {
                 errorString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             }
+            else if ([response isKindOfClass:[NSString class]]) {
+                errorString = response;
+            }
             else
             {
                 errorString = @"Unknown Error";
