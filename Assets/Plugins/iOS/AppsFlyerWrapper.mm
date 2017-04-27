@@ -140,7 +140,7 @@ extern "C" {
           }
           failure:^(NSError *error, id response)
           {
-            NSString *errorString = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
+            NSString *errorString = (!error) ? @"unknown" : [NSString stringWithFormat:@"error: %@", [error localizedDescription]];
             if ([response isKindOfClass:[NSDictionary class]]) {
                 if ([response objectForKey:@"error"] != nil)
                 {
@@ -157,7 +157,7 @@ extern "C" {
             else if ([response isKindOfClass:[NSString class]]) {
                 errorString = response;
             }
-            NSLog(@"response = %@", errorString);
+            NSLog(@"Response = %@", errorString);
    
             UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [errorString UTF8String]);
         }];
