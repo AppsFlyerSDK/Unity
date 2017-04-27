@@ -140,7 +140,7 @@ extern "C" {
           }
           failure:^(NSError *error, id response)
           {
-            NSString *errorString;
+            NSString *errorString = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
             if ([response isKindOfClass:[NSDictionary class]]) {
                 if ([response objectForKey:@"error"] != nil)
                 {
@@ -156,10 +156,6 @@ extern "C" {
             }
             else if ([response isKindOfClass:[NSString class]]) {
                 errorString = response;
-            }
-            else
-            {
-                errorString = @"Unknown Error";
             }
             NSLog(@"response = %@", errorString);
    
