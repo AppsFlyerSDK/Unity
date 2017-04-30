@@ -111,43 +111,55 @@ extern "C" {
         }
 
         
-        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString price:priceValue currency:currencyString transactionId:transactionIdString additionalParameters:customParams success:^(NSDictionary *result){
-            
+        [[AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:productIdentifierString
+                                                                  price:priceValue
+                                                               currency:currencyString
+                                                          transactionId:transactionIdString
+                                                   additionalParameters:customParams
+          success:^(NSDictionary *result)
+          {
             NSLog(@"Purcahse succeeded And verified!!!");
             
             NSData *jsonData;
-            if (result[@"receipt"] != nil) {
-                NSError *jsonError;
-                jsonData = [NSJSONSerialization dataWithJSONObject:result[@"receipt"]
-                                                               options:0
-                                                                 error:&jsonError];
-            }
             
-            if (!jsonData) {
+            NSError *jsonError;
+            jsonData = [NSJSONSerialization dataWithJSONObject:result
+                                                       options:0
+                                                         error:&jsonError];            
+            if (jsonError)
+            {
                 NSLog(@"JSON parse error");
                 UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [@"Invalid Response" UTF8String]);
             }
-            else {
-                
+            else
+            {
                 NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
                 UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE, [JSONString UTF8String]);
                 
             }
-        } failure:^(NSError *error, id response) {
-            NSLog(@"response = %@", response);
-            NSString *errorString;
-            if ([response objectForKey:@"error"] != nil){
-                errorString = response[@"error"];
+          }
+          failure:^(NSError *error, id response)
+          {
+            NSString *errorString = (!error) ? @"unknown" : [NSString stringWithFormat:@"error: %@", [error localizedDescription]];
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                if ([response objectForKey:@"error"] != nil)
+                {
+                    errorString = response[@"error"];
+                }
+                else if ([response objectForKey:@"status"] != nil)
+                {
+                    errorString = [NSString stringWithFormat:@"Error code = %@", response[@"status"]];
+                }
             }
-            else if ([response objectForKey:@"status"] != nil) {
-                errorString = [NSString stringWithFormat:@"Error code = %@", response[@"status"]];
+            else if ([response isKindOfClass:[NSData class]]) {
+                errorString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
             }
-            else {
-                errorString = @"Unknown Error";
+            else if ([response isKindOfClass:[NSString class]]) {
+                errorString = response;
             }
-            
+            NSLog(@"Response = %@", errorString);
+   
             UnitySendMessage(UNITY_SENDMESSAGE_CALLBACK_MANAGER, UNITY_SENDMESSAGE_CALLBACK_VALIDATE_ERROR, [errorString UTF8String]);
-            
         }];
     }
     
