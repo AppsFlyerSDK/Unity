@@ -12,12 +12,16 @@
 
 <a href="https://support.appsflyer.com/hc/en-us/articles/213766183-Unity"><font size="4"><b>Unity Plugin Integration Guide.</b></font></a>
 
-<br>
-Release notes:<br>
+
+<br>----------<br>
+In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com<br><br>
+*When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*<br>
+----------<br>
+
+<br>_Release notes_:<br>
 V-4.14.1 <br>
 - Fixed iOS Receipt validation issue (RD-4796) <br>
 
-Release notes:<br>
 V-4.14.0 <br>
 - Update Appsflyer Android SDK version to 4.6.2 <br>
 - Fixed Android Deeplink callbacks. <br>
