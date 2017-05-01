@@ -221,6 +221,10 @@ extern "C" {
         return cStringCopy([afid UTF8String]);
     }
     
+    const void mSetShouldCollectDeviceName (bool shouldCollectDeviceName) {
+        [AppsFlyerTracker sharedTracker].shouldCollectDeviceName = shouldCollectDeviceName;
+    }
+    
 
 }
 
