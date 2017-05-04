@@ -14,10 +14,12 @@
 
 <br>
 Release notes:<br>
+V-4.14.2 <br>
+- Bug Fixes (RD-5112 / RD-1434) <br>
+
 V-4.14.1 <br>
 - Fixed iOS Receipt validation issue (RD-4796) <br>
 
-Release notes:<br>
 V-4.14.0 <br>
 - Update Appsflyer Android SDK version to 4.6.2 <br>
 - Fixed Android Deeplink callbacks. <br>
