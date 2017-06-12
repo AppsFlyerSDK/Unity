@@ -7,6 +7,11 @@ using System.Collections.Generic;
 
 public class AppsFlyer : MonoBehaviour {
 	
+
+//	void onStart() {
+//		AndroidJavaClass obj = new AndroidJavaClass ("com.appsflyer.AppsFlyerLib");
+//
+//	}
 	
 	#if UNITY_IOS && !UNITY_EDITOR
 	[DllImport("__Internal")]
@@ -329,6 +334,42 @@ public class AppsFlyer : MonoBehaviour {
 		cls_AppsFlyer.Call("setGCMProjectNumber", googleGCMNumber);
 	}
 
+//	public static void setUserEmails1(string[] emails) {
+//		using(AndroidJavaClass cls_array = new AndroidJavaClass("java.lang.reflect.Array")) {
+//			AndroidJavaClass cls_string = new AndroidJavaClass("java.lang.String");
+//			using(AndroidJavaObject stringArr = cls_array.CallStatic<AndroidJavaObject>("newInstance",cls_string,emails.Length)) {
+//				for(int i=0; i < emails.Length ; i++) {
+//					cls_array.CallStatic("set", stringArr, i, emails[i]);
+//				}
+//				cls_AppsFlyer.Call("setUserEmails", stringArr);
+//			}
+//		}
+//	}
+//
+//	public static void setUserEmails(string[] emails) {
+//		AndroidJNI.AttachCurrentThread();
+//		IntPtr jArrPtr = AndroidJNIHelper.ConvertToJNIArray(emails);
+//		jvalue[] arr = new jvalue[1];
+//		arr[0].l = jArrPtr;
+//
+//		IntPtr methodId = AndroidJNIHelper.GetMethodID(cls_AppsFlyer.GetRawClass(), "setUserEmails");
+//		AndroidJNI.CallVoidMethod(cls_AppsFlyer.GetRawObject(), methodId, arr);
+//	}
+//
+//	public static void setUserEmails(AFEnums.EmailsCryptType emailsCryptType, string[] emails) {
+//		using(AndroidJavaClass cls_array = new AndroidJavaClass("java.lang.reflect.Array")) {
+//			AndroidJavaClass cls_string = new AndroidJavaClass("java.lang.String");
+//			using(AndroidJavaObject stringArr = cls_array.CallStatic<AndroidJavaObject>("newInstance",cls_string,emails.Length)) {
+//				for(int i=0; i < emails.Length ; i++) {
+//					cls_array.CallStatic("set", stringArr, i, emails[i]);
+//				}
+//				cls_AppsFlyer.Call("setUserEmails", (int)emailsCryptType, emails);
+//			}
+//		}
+//		cls_AppsFlyer.Call("setUserEmails", (int)emailsCryptType, AndroidJNIHelper.CreateJNIArgArray(emails));
+//	}
+
+
 	#else
 	//editor
 	public static void validateReceipt(string publicKey, string purchaseData, string signature, string price, string currency, Dictionary<string,string> extraParams) {}
@@ -355,5 +396,15 @@ public class AppsFlyer : MonoBehaviour {
 	public static void getConversionData (){}
 	public static string getAppsFlyerId () {return null;}
 	public static void handleOpenUrl(string url, string sourceApplication, string annotation) {}
+	public static void setUserEmails(string[] emails) {}
+	public static void setUserEmails(AFEnums.EmailsCryptType emailsCryptType, string[] emails) {}
+
+
 	#endif
 }
+
+namespace AFEnums
+{
+	public enum EmailsCryptType {NONE, SHA1, MD5, SHA256};
+}
+
