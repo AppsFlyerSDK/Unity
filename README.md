@@ -53,5 +53,16 @@ V-4.10.0 <br>
 <br><br>
 Additional information:<br>
 
+<br><br>
+Instructions for building AppsFlyer UnityPackage from the sources:<br>
+<br>
+1. Open the project in Unity.<br>
+2. In the Project window, choose the Assets->Plugins folder, and then select all the files and folders inside the Plugins folder - as such:<br>
+![alt text](http://i.imgur.com/ZBr6jPy.png)<br>
+3. Then from the menu choose Assets > Export Package… to bring up the Exporting Package dialog box. There make sure you uncheck the 'include dependencies' box, and verify that all the plugins exists and are checked. <br>
+![alt text](http://i.imgur.com/XjFcA31.png)<br>
+When done click on 'Export..', name and save the package file.<br>
+<br><br>
+
 [AppsFlyer's Unity Sample Project](https://github.com/AppsFlyerSDK/AppsFlyerUnitySampleApp).
 
