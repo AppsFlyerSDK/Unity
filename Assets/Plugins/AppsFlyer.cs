@@ -54,6 +54,9 @@ public class AppsFlyer : MonoBehaviour {
 	[DllImport("__Internal")]
 	private static extern void mRegisterUninstall(byte[] pushToken);
 
+	[DllImport("__Internal")]
+	private static extern void mSetShouldCollectDeviceName(bool shouldCollectDeviceName);
+
 	public static void trackEvent(string eventName,string eventValue){
 		mTrackEvent(eventName,eventValue);
 		print("AF.cs this is deprecated method. please use trackRichEvent instead.");
@@ -130,6 +133,10 @@ public class AppsFlyer : MonoBehaviour {
 
 	public static void registerUninstall(byte[] token) {
 		mRegisterUninstall(token);
+	}
+
+	public static void setShouldCollectDeviceName(bool shouldCollectDeviceName) {
+		mSetShouldCollectDeviceName(shouldCollectDeviceName);
 	}
 
 	#elif UNITY_ANDROID && !UNITY_EDITOR
@@ -381,6 +388,6 @@ public class AppsFlyer : MonoBehaviour {
 	public static void loadConversionData(string callbackObject, string callbackMethod, string callbackFailedMethod){}
 	[System.Obsolete("Use enableUninstallTracking(string senderId)")]
 	public static void setGCMProjectNumber(string googleGCMNumber){}
-
+	public static void setShouldCollectDeviceName(bool shouldCollectDeviceName) {}
 	#endif
 }
