@@ -26,6 +26,6 @@ static const char * UNITY_SENDMESSAGE_CALLBACK_RETARGETTING_ERROR = "onAppOpenAt
 static const char * UNITY_SENDMESSAGE_OPEN_URL = "onAppOpenUrl";
 
 
-@interface AppsFlyerDelegate : NSObject <AppsFlyerTrackerDelegate, AppDelegateListener>
+@interface AppsFlyerDelegate : NSObject <AppsFlyerTrackerDelegate>
 
 @end
