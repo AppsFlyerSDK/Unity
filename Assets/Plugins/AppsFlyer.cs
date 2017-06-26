@@ -195,7 +195,6 @@ public class AppsFlyer : MonoBehaviour {
 	}
 
 	public static void init(string key){
-		afPropertiesInstance.Call("set", "launchProtectEnabled", false);
 		print("AF.cs init");
 		devKey = key;
 		using (AndroidJavaClass cls_UnityPlayer = new AndroidJavaClass ("com.unity3d.player.UnityPlayer")) {
