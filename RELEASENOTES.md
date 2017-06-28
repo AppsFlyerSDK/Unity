@@ -1,7 +1,9 @@
 # Release Notes
 
 ### 4.14.3
-* Update native SDK for Unity (RD-4115)
+* Update native SDK for Unity (RD-4115)   
+	* Android v4.7.3
+	* iOS v4.7.11
 * init(key) called twice on Android (65)
 
 ### 4.14.1
