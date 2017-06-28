@@ -11,6 +11,7 @@ In order for us to provide optimal support, we would kindly ask you to submit an
 ----------
 
 ####For details regarding Integration, please refer to this article:
+
 <a href="https://support.appsflyer.com/hc/en-us/articles/213766183-Unity"><font size="4"><b>AppsFlyer SDK Integration - Unity</b></font></a>
 
 ----------
