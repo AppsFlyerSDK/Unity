@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.15.1
+* Update native SDK for Unity
+    * Android v4.8.3
+	* iOS v4.8.1 (b602)
+* Added new API for Android: `init(<DEV_KEY>,<CALLBACK_OBJECT>)`   
+
 ### 4.14.3
 * Update native SDK for Unity (RD-4115)   
 	* Android v4.7.3
