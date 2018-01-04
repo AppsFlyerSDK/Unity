@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.16.0
+* Update native SDK for Unity
+    * Android v4.8.6
+	* iOS v4.8.1 (b602)
+* Support new google install referrer   
+
 ### 4.15.1
 * Update native SDK for Unity
     * Android v4.8.3
