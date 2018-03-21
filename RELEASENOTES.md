@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.16.2
+* Update native SDK for Unity
+    * Android v4.8.8
+* Added `setAdditionalData(Dictionary<string,string>)` API for Android / iOS
+
 ### 4.16.0
 * Update native SDK for Unity
     * Android v4.8.6
