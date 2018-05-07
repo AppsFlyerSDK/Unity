@@ -1,12 +1,12 @@
 # Release Notes
 
-### 4.14.4
+### 4.16.4
 * Upated Android SDK to v4.8.11 
 * Updated iOS SDK to v4.8.4
 * stopTracking(bool) API for iOS and Android
 * setCollectAndroidID(bool) API for Android
 
-### 4.14.3 (Internal)
+### 4.16.3 (Internal)
 * Update native SDK for Unity
 * init(key) called twice on Android (65)
 
