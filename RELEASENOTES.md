@@ -1,5 +1,22 @@
 # Release Notes
 
+### 4.17.0
+* Updated Android SDK to v4.8.13
+* Updated iOS SDK to v4.8.6
+* `setPreinstallAttribution(string MediaSource, string Campaign, string Site_Id);` API for Android.
+*`setMinTimeBetweenSessions(int seconds)` API for Android and iOS
+
+* Cross Promotion and User Invite APIs:
+
+ `setAppInviteOneLinkID(string OneLinkID);`
+
+ `generateUserInviteLink(Dictionary<string,string> parameters, string callbackObject, string 
+callbackMethod, string callbackFailedMethod);`
+
+ `trackCrossPromoteImpression(string promotedAppID, string campaign);`
+
+ `trackAndOpenStore(string promotedAppID, string campaign, Dictionary<string,string> customParams);`
+
 ### 4.16.4
 * Upated Android SDK to v4.8.11 
 * Updated iOS SDK to v4.8.4
