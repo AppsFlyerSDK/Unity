@@ -3,7 +3,7 @@
 ### 4.18.0
 * Updated Android SDK to v4.8.18
 * Updated iOS SDK to v4.8.10
-* Deprecated the `trackEvent(string eventName,string eventValue)` API 
+* Removed the `trackEvent(string eventName,string eventValue)` API 
 - Use `trackRichEvent(string eventName, Dictionary<string, string> eventValues)` for event tracking.
 * Fix for empty event values exception 
 
