@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.19.0
+* Updated Android SDK to v4.9.0
+* Updated iOS SDK to v4.9.0
+* Fixed missing iOS `onOpenStoreLinkGenerated` callback method in `AppsFlyerCallbacks.cs`
+
 ### 4.18.0
 * Updated Android SDK to v4.8.18
 * Updated iOS SDK to v4.8.10
