@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.20.0
+* Updated Android SDK to v4.10.0
+* Added API: `setUserEmails(EmailCryptType cryptType, params string[] userEmails)` for passing user emails
+* Added API: `setResolveDeepLinkURLs(params string[] userEmails)` for ESP
+
 ### 4.19.0
 * Updated Android SDK to v4.9.0
 * Updated iOS SDK to v4.9.0
@@ -16,8 +21,7 @@
 * Updated Android SDK to v4.8.13
 * Updated iOS SDK to v4.8.6
 * `setPreinstallAttribution(string MediaSource, string Campaign, string Site_Id);` API for Android.
-*`setMinTimeBetweenSessions(int seconds)` API for Android and iOS
-
+* `setMinTimeBetweenSessions(int seconds)` API for Android and iOS
 * Cross Promotion and User Invite APIs:
 
  `setAppInviteOneLinkID(string OneLinkID);`
