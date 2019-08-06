@@ -1,5 +1,8 @@
 # Release Notes
 
+### 4.20.1
+* Fix for ios debug logs
+
 ### 4.20.0
 * Updated Android SDK to v4.10.0
 * Added API: `setUserEmails(EmailCryptType cryptType, params string[] userEmails)` for passing user emails
