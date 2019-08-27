@@ -1,5 +1,12 @@
 # Release Notes
 
+### 4.20.2
+* Updated Android SDK to v4.10.2
+* Updated iOS SDK to v4.10.3
+* Removed iOS debug logs 
+* Added `setOneLinkCustomDomain(params string[] domains)` API for Android and iOS
+* Added `setValue(string value)` API for iOS
+
 ### 4.20.1
 * Fix for ios debug logs
 
