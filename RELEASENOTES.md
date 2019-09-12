@@ -1,5 +1,9 @@
 # Release Notes
 
+### 4.20.3
+* Updated iOS SDK to v4.10.4
+* Support for iOS 13
+
 ### 4.20.2
 * Updated Android SDK to v4.10.2
 * Updated iOS SDK to v4.10.3
