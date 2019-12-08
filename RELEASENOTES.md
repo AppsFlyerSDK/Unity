@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.21.0
+* Updated Android SDK to v5.0.0
+* Updated iOS SDK to v5.0.0
+* Bug fixes and maintenance
+
 ### 4.20.3
 * Update for iOS 13 push token retrieval needed for Uninstall Measurement
 * Updated iOS SDK to v4.10.4
