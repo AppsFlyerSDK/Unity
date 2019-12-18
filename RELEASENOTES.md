@@ -1,5 +1,8 @@
 # Release Notes
 
+### 4.21.1
+* Bug fixes and maintenance
+
 ### 4.21.0
 * Updated Android SDK to v5.0.0
 * Updated iOS SDK to v5.0.0
