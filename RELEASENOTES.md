@@ -1,5 +1,11 @@
 # Release Notes
 
+### 4.22.0
+* Updated Android SDK to v5.1.1
+* Updated iOS SDK to v5.1.0
+* removed sha1 & md5 email hashing
+* Bug fixes and maintenance
+
 ### 4.21.1
 * Bug fixes and maintenance
 
