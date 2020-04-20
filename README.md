@@ -1,12 +1,12 @@
 <img src="https://www.appsflyer.com/wp-content/uploads/2016/11/logo-1.svg"  width="200">
 
-# Unity AppsFlyer plugin for Android and iOS. 
+# Unity AppsFlyer plugin for Android and iOS (v4)
 
 
 ----------
 
-
-
+> appsflyer-unity-plugin v5 is now available on a new [github repositoy](https://github.com/AppsFlyerSDK/appsflyer-unity-plugin). 
+  
 In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com
 
 *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , reproduction steps, logs, code snippets and any additional relevant information.*
