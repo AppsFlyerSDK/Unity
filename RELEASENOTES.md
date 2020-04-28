@@ -1,5 +1,10 @@
 # Release Notes
 
+### 4.23.0
+* Updated Android SDK to v5.3.0
+* Updated iOS SDK to v5.3.0
+* Bug fixes and maintenance
+
 ### 4.22.2
 * Bug fixes and maintenance
 * Added init for android
